@@ -15,3 +15,12 @@ echo '<br>';
 const SEE = 'Hello World';
 echo SEE;
 ?>
+
+<?php 
+echo '<br>';
+$x=4;
+echo $x++;
+echo ++$x;
+echo $x--;
+echo --$x;
+?>
