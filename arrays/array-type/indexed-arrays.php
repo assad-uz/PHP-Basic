@@ -19,6 +19,7 @@
     $car[2]='Mercedise';
     var_dump ($car);
     echo '<br>';
+    print_r ($car);
 
 
 
