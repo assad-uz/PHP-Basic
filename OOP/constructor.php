@@ -7,10 +7,8 @@
 </head>
 <body>
     <?php 
-    class ClassName {
-        public $name;
-        public $age;
-        
+    class A{
+        function __construct
     }
 </body>
 </html>
