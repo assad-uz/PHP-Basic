@@ -6,21 +6,20 @@
     <title>Document</title>
 </head>
 <body>
-    <?php 
-    class Person{
+    <?php
+    class A{
         public $name;
         public $age;
-
-        function __construct($name,$age){
-            $this->name= $name;
-            $this->age= $age;
+        function set_name($name){
+            $this->name=$name;
         }
-
+        function get_name(){
+            return $this->name;
+        }
     }
-    $obj = new Person("ASSAD",25);
-    echo ($obj);
-    
+    $obj = new A();
+    $obj -> set_name('ASSAD');
+    echo $obj -> get_name();
     ?>
-
 </body>
 </html>

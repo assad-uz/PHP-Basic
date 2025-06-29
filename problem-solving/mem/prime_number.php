@@ -1,4 +1,11 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
 <form method='post'>
 enter a number<input type="text" name="fname">
 
@@ -25,4 +32,8 @@ if($c==0)
 echo "$b prime number";
 else
   echo "$b not a prime number";
-}?>
+}
+?>
+
+</body>
+</html>
