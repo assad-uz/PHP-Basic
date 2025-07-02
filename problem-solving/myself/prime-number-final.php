@@ -9,7 +9,7 @@
 
 <body>
     <form method='post'>
-        Enter a number <input type="text" name="fname">
+        Enter a number: <input type="text" name="fname">
 
         <input type="submit" name="submit">
     </form>
