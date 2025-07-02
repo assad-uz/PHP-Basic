@@ -4,34 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Prime Number</title>
 </head>
 
 <body>
     <form method='post'>
-        enter a number<input type="text" name="fname">
+        Enter a number <input type="text" name="fname">
 
         <input type="submit" name="submit">
     </form>
     <?php
-    $b = $_POST["fname"];
-    $c = 0;
+    $p = $_POST["fname"];
+    $isPrime = true;
     if ($_POST["submit"]) {
-        if ($b == 0 || $b == 1) {
+        if ($p == 0 || $p == 1) {
             echo "Not Prime or Composite";
             exit();
         }
-        for ($i = 2; $i < $b; $i++) {
-            if ($b % $i == 0) {
-                $c++;
+        for ($i = 2; $i < $p; $i++) {
+            if ($p % $i == 0) {
+                $isPrime = false;
                 break;
             }
         }
-        if ($c == 0)
-            echo "<script>alert('$b is a Prime Number')</script>";
+        if ($isPrime){
+            echo "<script>alert('$p is a Prime Number')</script>";
             //echo "$b prime number";
-        else
-            echo "<script>alert('$b is NOT a Prime Number')</script>";
+            } else{
+            echo "<script>alert('$p is NOT a Prime Number')</script>";
+            }
     }
     ?>
 
