@@ -6,11 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <?php 
-    class ClassName {
-        public $name;
-        public $age;
-        
-    }
+    
 </body>
 </html>
