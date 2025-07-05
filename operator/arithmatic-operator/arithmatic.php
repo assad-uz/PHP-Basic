@@ -14,6 +14,6 @@
     ?>
     <?php
     #subtraction
-    $
+    ?>
 </body>
 </html>
