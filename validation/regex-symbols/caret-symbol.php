@@ -2,7 +2,7 @@
 /* 1: Start Anchor (স্ট্রিং বা লাইনের শুরু বোঝায়)
  যখন ^ চিহ্নটি regex-তে [ ] এর বাইরে ব্যবহার করা হয়, তখন ^ এর অর্থ হয়: "স্ট্রিং/লাইনটি এই অক্ষর দিয়ে শুরু হতে হবে"
 */
-
+// Syntax: preg_match("/condition/", $input);
 echo preg_match("/^Hello/", "Hello world"); // output: 1 ✅ মিলে যাবে (এটা খুজবে উক্ত word টি শুরুতে আসে কিনা)
 echo "<br>";
 echo preg_match("/^world/", "Hello world"); // output: 0 ❌ মিলে যাবে না

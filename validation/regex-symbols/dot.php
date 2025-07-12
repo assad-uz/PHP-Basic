@@ -1,0 +1,10 @@
+<?php
+$str1 = "version 2.0";
+$str2 = "version 2a0";
+
+echo preg_match("/2.0/", $str1);  // ✅ Match — কারণ '.' মানে যেকোনো ক্যারেক্টার
+echo preg_match("/2.0/", $str2);  // ✅ Match — কারণ '.' a এর জায়গায় match করলো
+
+echo preg_match("/2\.0/", $str1); // ✅ Match — কারণ '.' মানে আসল ডট
+echo preg_match("/2\.0/", $str2); // ❌ Match — কারণ এখানে 'a', dot নয়
+?>
