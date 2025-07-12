@@ -9,5 +9,8 @@
 | \S   | Non-whitespace character  | space/tab ছাড়া যেকোনো কিছু     
 | \b   | Word boundary             | শব্দের সীমানা (প্রথম বা শেষ) 
 | \B   | Not a word boundary       | শব্দের মাঝখানে 
+| \    | Backslash / Escape        | স্পেশাল ক্যারেক্টারকে সাধারণ ক্যারেক্টার বানায় 
+| \.   | Special character         | স্পেশাল ক্যারেক্টার (Same as 12)
+
 
 ক্যাপিটাল অক্ষর দিলে না বোঝায়: যেমন \D = non-digit
