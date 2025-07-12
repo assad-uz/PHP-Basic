@@ -16,7 +16,7 @@ class Patient{
         $this->phone = $_phone;
     }
     function show_arrange(){
-        return 'Patient Name: '.$this->name.', '.'Serial No: '.$this->sl.', '.'Visit-time: '.$this->time.'E-mail:'.$this->email.'Contact:'.$this->phone.PHP_EOL;
+        return 'Patient Name: '.$this->name.', '.'Serial No: '.$this->sl.', '.'Visit-time: '.$this->time.', '.'E-mail: '.$this->email.', '.'Contact: '.$this->phone.PHP_EOL;
     }
     function save(){
         file_put_contents(self::$list_path,$this->show_arrange(),FILE_APPEND);

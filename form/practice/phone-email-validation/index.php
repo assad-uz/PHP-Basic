@@ -7,9 +7,13 @@ if(isset($_POST['Submit'])){
     $email = $_POST['pEmail'];
     $phone = $_POST['pNum'];
 
+    if(preg_match("/^[a-zA-Z0-9.-_%]+@[a-zA-Z0-9]+\.[a-z]{2,}$/", $email) && preg_match("/^01[3-9]\d{8}$/",$phone)){
     $patient = new Patient($name,$sl,$time,$email,$phone);
     $patient -> save();
     echo "Successfully Stored! :)";
+    }else {
+        echo "Invalid E-mail or Phone number!";
+    }
 }
 ?>
 
