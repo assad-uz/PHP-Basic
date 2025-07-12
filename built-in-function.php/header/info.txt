@@ -1,0 +1,33 @@
+header() ফাংশন দিয়ে আমি ব্রাউজারকে নির্দেশ দিতে পারি, যেমন:
+> কোন পেজে পাঠানো হবে
+> কোন ধরণের ডেটা পাঠানো হচ্ছে
+> কুকি/ক্যাশ কন্ট্রোল
+> ফাইল ডাউনলোড করানো ইত্যাদি
+
+▣ সবচেয়ে বেশি যেটা ব্যবহৃত হয়:
+> Redirect করা (অন্য পেইজে পাঠানো):
+
+    header("Location: dashboard.php");
+
+এর মানে:
+"এই পেইজ দেখিও না! ইউজারকে dashboard.php তে পাঠিয়ে দাও।"
+
+• header() সবসময় echo বা HTML এর আগে থাকতে হবে। নয়তো PHP error দেখাবে।
+
+▣ Correct Example:
+<?php
+header("Location: page.php");
+exit;
+?>
+
+▣ Wrong Example:
+<html>  <!-- HTML already started -->
+<?php header("Location: page.php"); ?>
+
+Other uses:
+> Downloading files
+> Cache closed
+> Content Type নির্ধারণ
+
+• header() হল PHP-র মাধ্যমে ব্রাউজারের মাথায় নির্দেশ পাঠানোর উপায়।
+• এটি শুধু সেই সময়ই কাজ করে যখন কোনো আউটপুট এখনো পাঠানো হয়নি।
