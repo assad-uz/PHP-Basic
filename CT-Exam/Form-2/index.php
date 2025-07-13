@@ -1,12 +1,17 @@
 <?php 
 require_once 'user_data.php';
 if(isset($_POST['Submit'])){
-    $email = $_POST['uemail'];
-    $password = $_POST['password'];
+    $id = $_POST['numID'];
+    $name = $_POST['txtName'];
+    $email = $_POST['uEmail'];
 
-    $patient = new User($uemail, $password);
-    $patient -> save();
-    echo "E-mail and Password stored successfully!";
+    if(preg_match("/^\d{1,5}$/", $id) && preg_match("/^[a-zA-Z0-9.-_%]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/", $email)){
+        $student = new Student($id, $name, $email);
+        $student -> save();
+        echo "Successfully stored!";
+    }else{
+        echo "Unvalid ID or, E-mail! Enter a valid ID and E-mail address.";
+    }
 }
 ?>
 
@@ -19,17 +24,20 @@ if(isset($_POST['Submit'])){
 </head>
 <body>
     <form action="#" method="post">
-        <label for="uemail">E-mail: </label><br>
-        <input type="text" name="uemail"><br><br>
+        <label for="numID">ID: </label><br>
+        <input type="number" name="numID"><br><br>
 
-        <label for="password">Password: </label> <br>
-        <input type="number" name="password"><br><br>
+        <label for="txtName">Name: </label><br>
+        <input type="text" name="txtName"><br><br>
+        
+        <label for="uEmail">E-mail: </label><br>
+        <input type="email" name="uEmail"><br><br>
         
         <input type="submit" name="Submit">
     </form>
 
     <?php
-    Patient::display_browser();
+    Student::display_browser();
     ?>
 
 </body>

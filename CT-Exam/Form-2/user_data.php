@@ -1,25 +1,27 @@
 <?php
-class User{
-    private $uemail;
-    private $password;
+class Student{
+    private $id;
+    private $name;
+    private $email;
     private static $list_path = 'list.txt';
 
-    function __construct($_uemail,$_password){
-        $this->uemail = $_uemail;
-        $this->password = $_password;
+    function __construct($_id,$_name,$_email,){
+        $this->id = $_id;
+        $this->name = $_name;
+        $this->email = $_email;
     }
     function show_arrange(){
-        return 'User Name: '.$this->uemail.', '.'Password: '.$this->password.PHP_EOL;
+        return 'ID: '.$this->id.', '.'Name: '.$this->name.', '.'E-mail: '.$this->email.PHP_EOL;
     }
     function save(){
         file_put_contents(self::$list_path,$this->show_arrange(),FILE_APPEND);
     }
     static function display_browser(){
-        $patients_info = file(self::$list_path);
-        echo "<b>User Name | Password</b><br>";
-        foreach($patients_info as $patient){
-           list($uemail,$password) = explode(",",trim($patient));
-           echo "$uemail | $password<br>";
+        $students_info = file(self::$list_path);
+        echo "<b><br>ID | Name | E-mail</br><br>";
+        foreach($students_info as $student){
+           list($id,$name,$email) = explode(",",trim($student));
+           echo "$id | $name | $email<br>";
         }
     }
 
