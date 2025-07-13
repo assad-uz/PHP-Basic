@@ -1,4 +1,8 @@
 <?php 
+// ob_start(); 
+// (to avoid header issues) যদি header() এর আগে কিছু output চলে আসে (যেমন whitespace, echo), তাহলে কাজ করবে না।  তাই রিস্ক এড়ানোর জন্য এই ফাংশন ব্যবহার করেছি। 
+// This is login page
+
 if(isset($_POST['logIn'])){
     $username = $_POST['UN'];
     $password = $_POST['pass'];
@@ -15,7 +19,8 @@ if(isset($_POST['logIn'])){
     if($authenticated){
         header("Location: first-page.php");
     }else{
-        echo "<script>alert('Username or password is incorrect! Try Again.')</script>";
+        // echo "<script>alert('Username or password is incorrect! Try Again.')</script>";
+        $message = "Username or password is incorrect! Try again.";
     }
 }
 ?>
@@ -29,6 +34,9 @@ if(isset($_POST['logIn'])){
     <title>Document</title>
 </head>
 <body>
+    <?php 
+    echo isset($message)? $message : '';
+    ?>
     <form action="#" method="post">
         <div> 
         <label for="UN">Username: </label><br>
