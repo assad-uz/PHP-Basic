@@ -1,14 +1,42 @@
+<?php 
+ session_start();
+require_once 'patient_data.php';
+if(isset($_POST['Submit'])){
+    $name = $_POST['pName'];
+    $sl = $_POST['sl'];
+    $time = $_POST['vTime'];
+
+    $patient = new Patient($name,$sl,$time);
+    $patient -> save();
+    echo "Successfully Stored! :)";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Patients Data</title>
 </head>
 <body>
-    <div> 
-        <h2>Hi, Your password is 100% correct!</h2> <br> 
-        <h4>You are our original member. Thanks for comming back. Now enjoy all the contents in this page as much as you can!</h4>
-    </div>
+    <form action="#" method="post">
+        <label for="pName">Patient name: </label><br>
+        <input type="text" name="pName"><br><br>
+
+        <label for="sl">Serial No: </label> <br>
+        <input type="number" name="sl"><br><br>
+
+        <label for="vTime">Time: </label> <br>
+        <input type="time" name="vTime"><br><br>
+        
+        <input type="submit" name="Submit">
+    </form>
+
+    <!-- New -->
+    <?php
+    Patient::display_browser();
+    ?>
+
 </body>
 </html>
