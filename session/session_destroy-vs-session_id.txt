@@ -1,0 +1,40 @@
+session_destroy();---------------
+
+এটা session-এর data গুলো destroy করে, কিন্তু session ID পুরাই delete করে না যতক্ষণ না page refresh হয়ে নতুন session না শুরু হয়।
+
+session_id();--------------------
+
+Q. কেন session_id() কাজ করে logout এর পরেও?
+A: কারণ PHP এর behavior এমন-
+
+session_destroy():
+
+✅ session variables clear করে
+
+✅ session file delete করে
+
+❌ কিন্তু current session ID browser এ থেকে যায় (Cookie তে)
+
+🔁 তুমি যদি পরের page-এ আবার session_start() করো, সে আবার ঐ ID নিয়ে নেবে
+
+
+Q. তাহলে কী করলে পুরোপুরি শেষ হবে?
+A:
+
+<?php
+session_start();
+session_unset();
+session_destroy();
+
+// Kill the session cookie manually
+if (ini_get("session.use_cookies")) {
+    setcookie(session_name(), '', time() - 42000, '/');
+}
+
+header("Location: login.php");
+exit;
+
+এখানে এই লাইনটা গুরুত্বপূর্ণ:
+setcookie(session_name(), '', time() - 42000, '/');
+
+এটা browser এর cookie থেকেও session ID মুছে দেয়, ফলে session_id() আর কাজ করবে না।
