@@ -1,5 +1,10 @@
 <?php 
  session_start();
+ if (!isset($_SESSION['start'])) {
+    header("Location: login.php");
+    exit;
+}
+
 require_once 'patient_data.php';
 if(isset($_POST['Submit'])){
     $name = $_POST['pName'];

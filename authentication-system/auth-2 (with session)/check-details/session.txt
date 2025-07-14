@@ -1,1 +1,47 @@
-1. First add Login page
+Total 3 stage to add session.
+
+1. First, add this code into the Login page (Login Page এ Session Start এবং Set করা)
+
+Code:
+session_start(); (its position all the time after '<?php')
+
+if(...){
+    .....
+    .....
+    $txt = file('data.txt');
+    $authenticated = false;
+
+    foreach(...){
+        ......
+        if(...){
+            .....
+            ......
+        }
+        if($authenticated){
+            $_SESSION['sestart'] = $username; // সেশন সেট
+            header("Location: first_page.php");
+        }else{
+            echo '....';
+        }
+    }
+}
+
+2. Second, add this code into the redirect page (each page)( Protected Page (redirect page) এ Session Check করা)
+
+Code: 
+session_start(); (its position all the time after '<?php')
+
+if(!isset($_SESSION['start'])){
+    header ("Location: login.php");
+    exit;
+}
+
+>  এতে ইউজার সরাসরি URL দিয়ে ঢুকতে পারবে না — আগে লগইন করতে হবে।
+
+3. Last, add this code into the logout page (Logout Page এ Session Destroy করা)
+
+Code:
+session_start(); (its position all the time after '<?php')
+unset($_SESSION['start']); //সেশন unset করা
+session_destroy(); //সম্পূর্ণ সেশন ধ্বংস করা
+header ("Location: login.php"); 
