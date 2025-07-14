@@ -42,6 +42,8 @@ if(isset($_POST['Submit'])){
     <?php
     Patient::display_browser();
     ?>
+    
+    <a href="logout.php">Logout</a>
 
 </body>
 </html>

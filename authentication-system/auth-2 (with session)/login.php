@@ -9,14 +9,15 @@ if(isset($_POST['logIn'])){
 
     foreach($txtfile as $list){
         list($_UN,$_Pass) = explode(",", $list);
-        if (trim($_UN) == trim($username) && trim($_Pass) == trim($password)){
-            $authenticated = true;
+        if (trim($_UN) == trim($username) && trim($_Pass) == trim($password)){ // File-based login system এ এটা অনেক গুরুত্বপূর্ণ, কারণ .txt ফাইলে newline/space থাকতেই পারে।
+            $authenticated = true; 
             break;
         }
     }
     if($authenticated){
         $_SESSION['start'] = $username; //New
         header("Location: first-page.php");
+        exit;
     }else{
         // echo "<script>alert('Username or password is incorrect! Try Again.')</script>";
         $message = "Username or password is incorrect! Try again.";
@@ -39,10 +40,10 @@ if(isset($_POST['logIn'])){
     <form action="#" method="post">
         <div> 
         <label for="UN">Username: </label><br>
-        <input type="text" name="UN"><br><br>
+        <input type="text" name="UN" required><br><br>
 
         <label for="pass">Password: </label><br>
-        <input type="password" name="pass"><br><br>
+        <input type="password" name="pass" required><br><br>
 
         <input type="submit" name="logIn" value="Log in">
         </div>
