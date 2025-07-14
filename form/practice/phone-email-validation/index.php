@@ -12,7 +12,7 @@ if(isset($_POST['Submit'])){
     $patient -> save();
     echo "Successfully Stored! :)";
     }else {
-        echo "Invalid E-mail or Phone number!";
+        $mesge = "Invalid E-mail or Phone number!";
     }
 }
 ?>
@@ -25,6 +25,10 @@ if(isset($_POST['Submit'])){
     <title>Patients Data</title>
 </head>
 <body>
+    <?php 
+    echo isset($mesge)? $mesge : '';
+    ?>
+
     <form action="#" method="post">
         <label for="pName">Patient name: </label><br>
         <input type="text" name="pName"><br><br>
