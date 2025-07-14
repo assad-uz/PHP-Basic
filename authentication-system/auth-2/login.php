@@ -1,8 +1,6 @@
 <?php 
 session_start(); //New
-// ob_start(); 
-// (to avoid header issues) যদি header() এর আগে কিছু output চলে আসে (যেমন whitespace, echo), তাহলে কাজ করবে না।  তাই রিস্ক এড়ানোর জন্য এই ফাংশন ব্যবহার করেছি। 
-// This is login page
+// ob_start();  (to avoid header issues) যদি header() এর আগে কিছু output চলে আসে (যেমন whitespace, echo), তাহলে কাজ করবে না।  তাই রিস্ক এড়ানোর জন্য এই ফাংশন ব্যবহার করেছি। 
 
 if(isset($_POST['logIn'])){
     $username = $_POST['UN'];
