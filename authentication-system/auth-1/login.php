@@ -10,7 +10,7 @@ if(isset($_POST['logIn'])){
 
     foreach($txtfile as $list){
         list($_UN,$_Pass) = explode(",", $list);
-        if($_UN == $username && $_Pass == $password){
+        if (trim($_UN) == trim($username) && trim($_Pass) == trim($password)){
             $authenticated = true;
             break;
         }

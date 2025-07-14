@@ -1,5 +1,4 @@
 <?php
- session_start();
 class Patient{
     private $name;
     private $sl;
@@ -20,7 +19,7 @@ class Patient{
     // New
     static function display_browser(){
         $patients_info = file(self::$list_path);
-        echo "<b>Patient Name | Serial No. | Time</b><br>";
+        echo "<b><br>Patient Name | Serial No. | Time</br><br>";
         foreach($patients_info as $patient){
            list($name,$sl,$time) = explode(",",trim($patient));
            echo "$name | $sl | $time <br>";
@@ -29,17 +28,4 @@ class Patient{
 
 }
 
-/*
-PHP-তে static কিওয়ার্ডটা function এর পরে বসে না, আগে বসে।
-
-file() ফাংশনটি ওই ফাইলের প্রতিটি লাইন একটি একটি করে array-তে রিড করে রাখে।
-
-foreach মানে হচ্ছে → “এই অ্যারে থেকে একেকটা করে মান নাও, আর কাজ করো”
-
- list() ফাংশনের কাজ হলো — অ্যারের ভেতরের মানগুলোকে একাধিক ভ্যারিয়েবলে আলাদা করে ফেলা।
-
-trim() ফাংশনের কাজ হলো স্ট্রিং-এর শুরু ও শেষে থাকা অপ্রয়োজনীয় স্পেস (whitespace), ট্যাব, নিউলাইন (\n), ক্যারেজ রিটার্ন (\r) — এগুলো কেটে ফেলা।
-
- ধরো list.txt ফাইলে যদি ৩ জন রোগীর তথ্য থাকে, তাহলে $patient অ্যারেতে ৩টি এলিমেন্ট থাকবে — প্রত্যেকটি একেকটি লাইন (string)
-*/
 ?>

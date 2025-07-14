@@ -1,6 +1,5 @@
 <?php 
 session_start(); //New
-// ob_start();  (to avoid header issues) যদি header() এর আগে কিছু output চলে আসে (যেমন whitespace, echo), তাহলে কাজ করবে না।  তাই রিস্ক এড়ানোর জন্য এই ফাংশন ব্যবহার করেছি। 
 
 if(isset($_POST['logIn'])){
     $username = $_POST['UN'];
@@ -10,7 +9,7 @@ if(isset($_POST['logIn'])){
 
     foreach($txtfile as $list){
         list($_UN,$_Pass) = explode(",", $list);
-        if($_UN == $username && $_Pass == $password){
+        if (trim($_UN) == trim($username) && trim($_Pass) == trim($password)){
             $authenticated = true;
             break;
         }
@@ -41,8 +40,10 @@ if(isset($_POST['logIn'])){
         <div> 
         <label for="UN">Username: </label><br>
         <input type="text" name="UN"><br><br>
+
         <label for="pass">Password: </label><br>
         <input type="password" name="pass"><br><br>
+
         <input type="submit" name="logIn" value="Log in">
         </div>
     </form>

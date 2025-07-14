@@ -1,0 +1,46 @@
+Q. exit; এবং break; কি এক জিনিস?
+A: না, exit আর break এক নয়। এদের কাজ, scope এবং প্রভাব একদম আলাদা।
+
+exit;-----------
+
+exit; → পুরো স্ক্রিপ্ট থামিয়ে দেয়।
+
+কাজ:
+যেই মুহূর্তে exit; চলে, সেখান থেকে PHP পুরো স্ক্রিপ্ট execution থামিয়ে দেয়। নিচের কোনো কোড আর চলবে না।
+
+✅ কোথায় ব্যবহার হয়:
+> Redirect করার পর (header এর পরে)
+> স্ক্রিপ্ট একদম বন্ধ করতে চাইলে
+> Security check fail হলে
+
+Example:
+
+if (!isset($_SESSION['start'])) {
+    header("Location: login.php");
+    exit; // redirect এর পর থামিয়ে দিতে হয়
+}
+
+break;------------
+
+break; → শুধু লুপ বা switch থামায়
+
+কাজ:
+
+break শুধু loop (for, while, foreach) বা switch এর ভিতরে কাজ করে। লুপ চলার সময় নির্দিষ্ট শর্তে বের হয়ে আসতে ব্যবহার হয়।
+
+Example:
+
+foreach($list as $item) {
+    if ($item == "stop") {
+        break; // শুধু foreach থামাবে
+    }
+    echo $item;
+}
+
+
+| বিষয়              | `exit`               | `break`   
+
+| থামায় কাকে?       |   পুরো স্ক্রিপ্ট          | শুধু loop / switch  
+| কোথায় ব্যবহার হয়?  |   যেকোনো জায়গায়    | শুধু loop বা switch এর ভিতর 
+| সাধারণ ব্যবহার  | header redirect, error stop | foreach, while, switch 
+| নিচের কোড চলে?    | ❌ না                | ✅ লুপের বাইরে চলে 

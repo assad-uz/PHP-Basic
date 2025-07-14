@@ -1,0 +1,17 @@
+
+auth_check.php ফাইল বানাবো:
+
+<?php
+session_start();
+if (!isset($_SESSION['start'])) {
+    header("Location: login.php");
+    exit;
+}
+
+তারপর প্রতিটি পেইজে এটি বসাবো:
+
+<?php
+require_once 'auth_check.php';
+?>
+
+এতে করে বারবার কপি-পেস্ট না করেও এক লাইনেই সিকিউরিটি চেক বসে যাবে। ✅
