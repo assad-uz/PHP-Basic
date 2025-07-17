@@ -12,8 +12,8 @@ $user_name = "";
 $user_email = "";
 
 if(isset($_POST['btnSubmit'])) { 
-    $user_name = htmlspecialchars($_POST['name']);
-    $user_email = htmlspecialchars($_POST['email']);
+    $user_name = $_POST['name'];
+    $user_email = $_POST['email'];
 
     $filename = $_FILES['my_file']['name'];
     $temp_file = $_FILES['my_file']['tmp_name'];
