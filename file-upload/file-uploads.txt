@@ -1,0 +1,32 @@
+Q. $_FILES কি?
+A: যখন আপনি একটি file upload form দিয়ে ফাইল আপলোড করেন, তখন PHP সেই ফাইলের তথ্য $_FILES নামে একটি special অ্যারে-তে ধরে।
+
+Ex:
+<form action="upload.php" method="post" enctype="multipart/form-data">
+  <input type="file" name="my_file">
+  <input type="submit" value="Upload">
+</form>
+
+- এই ফর্ম থেকে ফাইল গেলে PHP তে আমরা $_FILES['my_file'] দিয়ে সেই ফাইলের তথ্য দেখতে পারি।
+
+$_FILES has total 5 parts:
+1. $_FILES['my_file']['name']
+2. $_FILES['my_file']['tmp_name']
+3. $_FILES['my_file']['size']
+4. $_FILES['my_file']['type']
+5. $_FILES['my_file']['error']
+
+1. $_FILES['my_file']['name']
+ব্যবহারকারীর ফাইলের আসল নাম (যেমনঃ photo.jpg, document.pdf)
+Ex:
+echo $_FILES['my_file']['name']; 
+// Output: photo.jpg
+
+2. $_FILES['my_file']['tmp_name']
+সার্ভারে যেখানে অস্থায়ীভাবে ফাইলটি সেভ হয়েছে, সেই path
+PHP ফাইল আপলোড করলে সেটি আগে একটা temporary (tmp) ফোল্ডারে সেভ হয়।
+
+Ex:
+echo $_FILES['my_file']['tmp_name']; 
+// Output: C:\xampp\tmp\php123.tmp
+এই path থেকে move_uploaded_file() দিয়ে আমরা ফাইলকে স্থায়ীভাবে কোথাও রাখি
