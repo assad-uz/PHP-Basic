@@ -9,6 +9,7 @@ Ex:
 
 - এই ফর্ম থেকে ফাইল গেলে PHP তে আমরা $_FILES['my_file'] দিয়ে সেই ফাইলের তথ্য দেখতে পারি।
 
+---------------------------------
 $_FILES has total 5 parts:
 1. $_FILES['my_file']['name']
 2. $_FILES['my_file']['tmp_name']
@@ -16,12 +17,14 @@ $_FILES has total 5 parts:
 4. $_FILES['my_file']['type']
 5. $_FILES['my_file']['error']
 
+---------------------------------
 1. $_FILES['my_file']['name']
 ব্যবহারকারীর ফাইলের আসল নাম (যেমনঃ photo.jpg, document.pdf)
 Ex:
 echo $_FILES['my_file']['name']; 
 // Output: photo.jpg
 
+---------------------------------
 2. $_FILES['my_file']['tmp_name']
 সার্ভারে যেখানে অস্থায়ীভাবে ফাইলটি সেভ হয়েছে, সেই path
 PHP ফাইল আপলোড করলে সেটি আগে একটা temporary (tmp) ফোল্ডারে সেভ হয়।
@@ -30,3 +33,33 @@ Ex:
 echo $_FILES['my_file']['tmp_name']; 
 // Output: C:\xampp\tmp\php123.tmp
 এই path থেকে move_uploaded_file() দিয়ে আমরা ফাইলকে স্থায়ীভাবে কোথাও রাখি
+
+---------------------------------
+3. $_FILES['my_file']['size']
+ফাইলের আকার (bytes-এ)
+
+Ex:
+echo $_FILES['my_file']['size']; 
+// Output: 24376 (মানে প্রায় 24KB)
+1024 bytes = 1 KB
+
+---------------------------------
+4. $_FILES['my_file']['type']
+ফাইলের টাইপ/MIME type — এটা বলে ফাইলটি কেমন (image, PDF, etc)
+
+Ex:
+echo $_FILES['my_file']['type']; 
+// Output: image/jpeg
+image/jpeg, application/pdf, text/plain ইত্যাদি হতে পারে
+
+---------------------------------
+5. $_FILES['my_file']['error']
+কোনো সমস্যা হলে এখানে error code থাকে
+যদি ফাইল সফলভাবে আপলোড হয়, তাহলে এর মান হবে 0
+
+✅ উদাহরণ:
+
+Ex:
+echo $_FILES['my_file']['error']; 
+// Output: 0 (মানে success)
+
