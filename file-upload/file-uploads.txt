@@ -63,3 +63,29 @@ Ex:
 echo $_FILES['my_file']['error']; 
 // Output: 0 (মানে success)
 
+---------------------------------
+ছোট্ট Example Code (সব print করে দেখাবে)
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    echo "File Name: " . $_FILES['my_file']['name'] . "<br>";
+    echo "Temp Name: " . $_FILES['my_file']['tmp_name'] . "<br>";
+    echo "File Size: " . $_FILES['my_file']['size'] . " bytes<br>";
+    echo "File Type: " . $_FILES['my_file']['type'] . "<br>";
+    echo "Upload Error Code: " . $_FILES['my_file']['error'] . "<br>";
+}
+?>
+
+---------------------------------
+Bonus: Move/upload করা
+
+move_uploaded_file($_FILES['my_file']['tmp_name'], "uploads/" . $_FILES['my_file']['name']);
+এতে ফাইলটা uploads/ ফোল্ডারে সেভ হয়ে যাবে।
+
+---------------------------------
+সংক্ষেপে মনে রাখার টিপস:
+
+name	    ফাইলের নাম (user যেটা দিয়েছিল)
+tmp_name	সার্ভারের অস্থায়ী ফোল্ডার
+size	    ফাইল কত বড় (bytes)
+type	    MIME টাইপ (image/jpeg ইত্যাদি)
+error	    সমস্যা থাকলে error code
