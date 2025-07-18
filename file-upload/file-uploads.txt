@@ -75,11 +75,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST')
+- এটা চেক করে ফর্মটি পাঠানো (submit) হয়েছে কি না এবং সেটা POST method দিয়ে হয়েছে কি না।
+- এটি সঠিকভাবে বলে দেয়: এই পেজে কোনো POST request এসেছে কিনা (যেকোনো ফর্ম থেকে)
+- বোঝে যে: method="POST" আছে ফর্মে।
+
+Ex:
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // সব POST ডেটা process করুন
+}
+- Best Use: যখন আপনি যেকোনো POST সাবমিশন (যেমন AJAX বা button ছাড়াও) handle করতে চান।
+
 ---------------------------------
 Bonus: Move/upload করা
 
 move_uploaded_file($_FILES['my_file']['tmp_name'], "uploads/" . $_FILES['my_file']['name']);
 এতে ফাইলটা uploads/ ফোল্ডারে সেভ হয়ে যাবে।
+
+
 
 ---------------------------------
 সংক্ষেপে মনে রাখার টিপস:

@@ -23,8 +23,14 @@ image-jpeg বা img/jpeg বা অন্য কোনো রকম spelling M
 - যদি আপনি enctype না দেন বা ভুল দেন তাহলে ফাইল PHP-র $_FILES এ আসবেই না।
 - আপনার কোড $_FILES['file']['name'] = empty দেখাবে।
 
-Q. multipart/form-data কবে ব্যবহার করব?
-A: 
+Q. multipart/form-data কখন ব্যবহার করব?
+A: যখন ফাইল/ইমেজ পাঠাতে হবে।
+
+আপনি লিখবেন                        	কাজ হবে?
+enctype="multipart/form-data"	      ✅ ঠিক
+enctype="form-data"	                  ❌ ভুল
+enctype="multipart"	                  ❌ ভুল
+enctype="data/form"	                  ❌ ভুল
 
 ----------------------------------
 Byte	     B    1 Byte
