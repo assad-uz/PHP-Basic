@@ -84,8 +84,8 @@ move_uploaded_file($_FILES['my_file']['tmp_name'], "uploads/" . $_FILES['my_file
 ---------------------------------
 সংক্ষেপে মনে রাখার টিপস:
 
-name	    ফাইলের নাম (user যেটা দিয়েছিল)
-tmp_name	সার্ভারের অস্থায়ী ফোল্ডার
-size	    ফাইল কত বড় (bytes)
-type	    MIME টাইপ (image/jpeg ইত্যাদি)
-error	    সমস্যা থাকলে error code
+name	    ইউজার যে ফাইলটা আপলোড করেছে তার আসল নাম
+type	    ফাইলের MIME টাইপ (যেমন image/jpeg, application/pdf)
+tmp_name	ফাইলটি যে টেম্পোরারি লোকেশনে সংরক্ষিত হয়েছে, সার্ভারের অস্থায়ী ফোল্ডার
+error	    কোনো ত্রুটি হলে তার error code (0 মানে কোনো ত্রুটি নেই)
+size	    ফাইলটির সাইজ (byte-এ)
