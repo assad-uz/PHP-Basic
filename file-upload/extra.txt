@@ -15,4 +15,11 @@ image/jpeg হলো স্ট্যান্ডার্ড MIME টাইপ (
 image-jpeg বা img/jpeg বা অন্য কোনো রকম spelling MIME টাইপ হিসেবে স্বীকৃত না — তাই PHP বা ব্রাউজার বুঝবে না।
 
 ----------------------------------
- লক্ষ্য করুন: enctype="multipart/form-data" অবশ্যই দিতে হবে, নইলে ফাইল কাজ করবে না।
+লক্ষ্য করুন: enctype="multipart/form-data" অবশ্যই দিতে হবে, নইলে ফাইল কাজ করবে না।
+
+----------------------------------
+Byte	     B    1 Byte
+Kilobyte	KB 	  1 KB = 1024 Bytes
+Megabyte	MB	  1 MB = 1024 KB = 1,048,576 Bytes
+Gigabyte	GB	  1 GB = 1024 MB
+Terabyte	TB	  1 TB = 1024 GB
