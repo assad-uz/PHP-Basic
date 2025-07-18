@@ -125,3 +125,10 @@ type	    ফাইলের MIME টাইপ (যেমন image/jpeg, applicat
 tmp_name	ফাইলটি যে টেম্পোরারি লোকেশনে সংরক্ষিত হয়েছে, সার্ভারের অস্থায়ী ফোল্ডার
 error	    কোনো ত্রুটি হলে তার error code (0 মানে কোনো ত্রুটি নেই)
 size	    ফাইলটির সাইজ (byte-এ)
+
+
+---------------------------------
+move_uploaded_file ( string $from, string $to )
+$from = ফাইলের temporary location (যেখানে PHP আপলোডের সময় ফাইল রাখে)
+
+$to = ফাইলের নতুন final location (আপনি যেখানেই ফাইল রাখতে চান, ফাইলের নামসহ path)

@@ -1,15 +1,24 @@
 <?php
-$img = "img\";
+$img = "img/";
 $filename = "";
 
 
 if(isset($_POST['btnSub'])){
-    $filename = $_FILES['btnSub']['name'];
-    $file_type = $_FILES['btnSub']['type'];
-    $temp_file = $_FILES['btnSub']['temp_name'];
-    $file_size = $_FILES['btnSub']['size'];
+    $filename = $_FILES['up1']['name'];
+    $file_type = $_FILES['up1']['type'];
+    $temp_file = $_FILES['up1']['tmp_name'];
+    $file_size = $_FILES['up1']['size'];
 
+    $fType = ["image\jpg", "image\jpeg", "image\png"];
+    $kb = $file_size / 1024;
+    
+    if(move_uploaded_file($temp_file, $img . $filename)){
+        echo "Upload Successful";
+    }else{
+        echo "Upload Failed";
+    }
 }
+
 ?>
 
 <!DOCTYPE html>
