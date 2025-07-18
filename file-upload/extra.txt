@@ -26,6 +26,7 @@ image-jpeg বা img/jpeg বা অন্য কোনো রকম spelling M
 Q. multipart/form-data কখন ব্যবহার করব?
 A: যখন ফাইল/ইমেজ পাঠাতে হবে।
 
+
 আপনি লিখবেন                        	কাজ হবে?
 enctype="multipart/form-data"	      ✅ ঠিক
 enctype="form-data"	                  ❌ ভুল
