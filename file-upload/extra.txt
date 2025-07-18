@@ -17,6 +17,15 @@ image-jpeg বা img/jpeg বা অন্য কোনো রকম spelling M
 ----------------------------------
 লক্ষ্য করুন: enctype="multipart/form-data" অবশ্যই দিতে হবে, নইলে ফাইল কাজ করবে না।
 
+- enctype (Encoding Type) হলো <form> ট্যাগের একটি attribute যা বলে দেয়, ব্রাউজারে form data কীভাবে encode করে সার্ভারে পাঠানো হবে। 
+- এখানে enctype="multipart/form-data" অবশ্যই দরকার যদি আপনি <input type="file"> ব্যবহার করেন।
+- এটি ব্রাউজারকে বলে: "এই ফর্মে ফাইলসহ অন্যান্য তথ্য আছে, তাই সব কিছু বিশেষভাবে encode করে পাঠাও।"
+- যদি আপনি enctype না দেন বা ভুল দেন তাহলে ফাইল PHP-র $_FILES এ আসবেই না।
+- আপনার কোড $_FILES['file']['name'] = empty দেখাবে।
+
+Q. multipart/form-data কবে ব্যবহার করব?
+A: 
+
 ----------------------------------
 Byte	     B    1 Byte
 Kilobyte	KB 	  1 KB = 1024 Bytes
