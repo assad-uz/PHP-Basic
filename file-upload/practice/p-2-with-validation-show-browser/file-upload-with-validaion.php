@@ -9,13 +9,19 @@ if(isset($_POST['btnSub'])){
     $temp_file = $_FILES['up1']['tmp_name'];
     $file_size = $_FILES['up1']['size'];
 
-    $fType = ["image\jpg", "image\jpeg", "image\png"];
+    $allowed_type = ["image/jpeg", "image/jpg", "image/png", "image/gif"];
     $kb = $file_size / 1024;
     
-    if(move_uploaded_file($temp_file, $img . $filename)){
-        echo "Upload Successful";
+    if(!in_array($file_type, $allowed_type)){
+        echo "File type is not matching. File type only allow JPEG, JPG, PNG and GIF";
+    }elseif($kb>500){
+        echo " File size is too large. Maximum file size should be 500 KB";
     }else{
-        echo "Upload Failed";
+        if(move_uploaded_file($temp_file, $img . $filename)){
+            echo "Upload Successful";
+        }else{
+            echo "Upload Failed";
+        }
     }
 }
 
