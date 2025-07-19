@@ -1,7 +1,7 @@
 <?php
 $img = "img/";
 $filename = "";
-
+$show_preview = false;
 
 if(isset($_POST['btnSub'])){
     $filename = $_FILES['up1']['name'];
@@ -19,6 +19,7 @@ if(isset($_POST['btnSub'])){
     }else{
         if(move_uploaded_file($temp_file, $img . $filename)){
             echo "Upload Successful";
+            $show_preview = true;
         }else{
             echo "Upload Failed";
         }
@@ -43,5 +44,13 @@ if(isset($_POST['btnSub'])){
         <input type="submit" value="Upload" name="btnSub">
     </form>
 </div>
+
+<?php 
+if($show_preview){
+    echo "<h3>Preview Uploaded File</h3>";
+    echo "<img src='" .$img . $filename ."' width='300px'>";
+}
+?>
+
 </body>
 </html>
