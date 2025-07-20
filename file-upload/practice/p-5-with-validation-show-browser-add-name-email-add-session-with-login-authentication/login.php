@@ -1,5 +1,12 @@
 <?php 
-s
+session_start();
+
+if(isset($_POST['btnSubmit'])){
+    $username = $_POST['txtUN'];
+    $password = $_POST['pass'];
+    $files = file("user.txt");
+}
+
 ?>
 
 <!DOCTYPE html>
