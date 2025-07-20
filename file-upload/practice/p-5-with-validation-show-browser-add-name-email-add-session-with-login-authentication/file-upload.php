@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $img = "img/";
 $filename = "";
 $show_preview = false;

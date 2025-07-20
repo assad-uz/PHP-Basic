@@ -22,7 +22,7 @@ if(isset($_POST['logIn'])){
         $message = "Username or password is incorrect! Try again.";
     }
 }
-
+?>
 
 
 <!DOCTYPE html>
