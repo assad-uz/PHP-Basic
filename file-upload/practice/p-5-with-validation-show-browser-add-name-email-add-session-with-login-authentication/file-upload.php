@@ -1,5 +1,9 @@
 <?php
 session_start();
+if(!isset($_SESSION['start'])){
+    header('Location: login.php');
+    exit;
+}
 
 $img = "img/";
 $filename = "";
@@ -64,6 +68,8 @@ if($show_preview){
     echo "<img src='" .$img . $filename ."' width='300px'>";
 }
 ?>
+<br>
+<a href="login.php">Logout</a>;
 
 </body>
 </html>
