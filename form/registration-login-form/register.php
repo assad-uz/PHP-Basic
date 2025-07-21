@@ -6,7 +6,7 @@ if (isset($_POST['register'])) {
     if ($username !== "" && $password !== "") {
         $line = $username . "," . $password . PHP_EOL;
         file_put_contents("users.txt", $line, FILE_APPEND);
-        echo "✅ Registration successful! <a href='login.php'>Login now</a>";
+        echo "Registration successful! <a href='login.php'>Login now</a>";
     } else {
         echo "❌ All fields are required.";
     }
