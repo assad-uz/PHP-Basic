@@ -1,10 +1,18 @@
 <?php
-$db = mysqli_connect('localhost','root','my-db');
+$db = mysqli_connect("localhost","root","","mydb");
     if(isset($_POST['submit'])){
-        $n = $_POST['txtName']
-        $a = $_POST['numAge']
-        $e = $_POST['txtEmail']
-        $c = $_POST['numContact']
+        $n = $_POST['txtName'];
+        $e = $_POST['txtEmail'];
+        $c = $_POST['numContact'];
+
+        $sql = "INSERT INTO users(name,email,contact) VALUES ($n,$e,$c)";
+        if(mysqli_query($db,$sql)==true){
+            echo "Data Inserted";
+            header('location: view.php');
+        }else{
+            echo "Data Not Inserted";
+        }
+
     }
 
 ?>
@@ -17,7 +25,7 @@ $db = mysqli_connect('localhost','root','my-db');
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-   <div class="container"> 
+    <div class="container"> 
     <div class="row"> 
         <div class="col-sm-3"></div>
         <a href="view.php">View Result</a>
@@ -25,8 +33,6 @@ $db = mysqli_connect('localhost','root','my-db');
     <form action="insert.php" method="POST"> 
         Name:<br>
         <input type ="text" name ="txtName"><br><br>
-        Age:<br>
-        <input type ="number" name ="numAge"><br><br>
         Email:<br>
         <input type ="email" name ="txtEmail"><br><br>
         Contact:<br>
@@ -34,9 +40,9 @@ $db = mysqli_connect('localhost','root','my-db');
         <input type ="submit" name ="submit" value="Insert" class="btn btn-success">
     </form>
         </div>
-        <!-- <div class="col-sm-3"></div> -->
+        <div class="col-sm-3"></div>
     </div>
-   </div>
+    </div>
 
 </body>
 </html>
