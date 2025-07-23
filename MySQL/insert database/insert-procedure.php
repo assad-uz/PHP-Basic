@@ -5,14 +5,7 @@ $db = mysqli_connect("localhost","root","","mydb");
         $e = $_POST['txtEmail'];
         $c = $_POST['numContact'];
 
-        $sql = "INSERT INTO users(name,email,contact) VALUES ('$n','$e','$c')";
-        if(mysqli_query($db,$sql)==true){
-            echo "Data Inserted";
-            header('location: view.php');
-        }else{
-            echo "Data Not Inserted";
-        }
-
+        $db->query("call new_routine('$n','$e','$c')");
     }
 
 ?>
