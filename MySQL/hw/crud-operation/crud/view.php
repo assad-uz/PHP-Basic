@@ -26,14 +26,26 @@ $connt = mysqli_connect("localhost", "root", "", "e_commerce");
                         <th>Contact</th>
                     </tr>
                 </thead>
+                <tbody>
+                    <?php
+                    $user = $connt->query("SELECT * FROM users");
+                    while(list($_id,$_name,$_email,$_contact) = $user->fetch_row()){
+                        echo "<tr>
+                                <td>$_id</td>
+                                <td>$_name</td>
+                                <td>$_email</td>
+                                <td>$_contact</td>
+                              </tr>";
+                    }
+                    ?>
+                </tbody>
             </table>
+
             <div class="text-end mt-3">
                 <a href="insert.php" class="btn btn-primary">Insert More</a>
             </div>
         </div>
     </div>
-
-    <?php
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

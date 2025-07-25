@@ -13,9 +13,10 @@ if(isset($_POST['submit'])){
     }else{
         echo "Data not inserted";
     }
-}else {
-    echo "Form not submitted!";
 }
+// else {
+//     echo "Form not submitted!";
+// }
 ?>
 
 <!DOCTYPE html>
