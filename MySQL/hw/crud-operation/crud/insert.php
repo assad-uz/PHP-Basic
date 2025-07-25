@@ -6,7 +6,12 @@ if(isset($_POST['submit'])){
     $c = $_POST['contact'];
     $sql= "INSERT INTO users (name,email,contact) VALUES ($n,$e,$c)";
 
-
+    if(mysqli_query($connt,$sql)==true){
+        echo "Data inserted";
+        header('location: view.php');
+    }else{
+        echo "Data not inserted";
+    }
 }
 
 ?>
