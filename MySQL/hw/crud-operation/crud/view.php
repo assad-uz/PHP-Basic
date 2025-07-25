@@ -42,7 +42,7 @@ $connt = mysqli_connect("localhost", "root", "", "e_commerce");
             </table>
 
             <div class="text-end mt-3">
-                <a href="insert.php" class="btn btn-primary">Insert More</a>
+                <a href="insert.php" class="btn btn-primary">Insert Data</a>
             </div>
         </div>
     </div>

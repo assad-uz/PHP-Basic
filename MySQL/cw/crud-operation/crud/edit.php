@@ -7,6 +7,7 @@ if ($_GET['id']) {
     $sql = "SELECT * FROM users WHERE id=$getid";
     $query = mysqli_query($conn, $sql);
     $data = mysqli_fetch_assoc($query);
+
     $id = $data['id'];
     $name = $data['name'];
     $age = $data['age'];
@@ -27,7 +28,7 @@ if (isset($_POST['edit'])) {
                  contact='$contact'
             where id = '$id' ";
     if (mysqli_query($conn, $sql1) == TRUE) {
-        echo "DATA update";
+        echo "DATA updated";
         header('location:delete.php');
         exit;
     } else {
