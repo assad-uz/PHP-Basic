@@ -29,6 +29,8 @@ if(isset($_POST['edit'])){
     
     if(mysqli_query($connt,$sql2)){
         echo "Data Updated Successfully!";
+        header('location: delete.php');
+        exit;
     }else{
         echo $sql2 . "Data not update";
     }
@@ -64,7 +66,7 @@ if(isset($_POST['edit'])){
           <input type="text" class="form-control" id="contact" name="contact" required>
         </div>
         <div class="mb-3">
-            <input type="submit" name="edit" value="Edit Data" class="btn btn-primary">
+            <input type="submit" name="edit" value="Update Data" class="btn btn-primary">
         </div>
       </form>
     </div>
