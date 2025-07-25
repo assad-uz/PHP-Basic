@@ -20,7 +20,12 @@ if(isset($_POST['edit'])){
     $id = $_POST['id'];
     $name = $_POST['name'];
     $email = $_POST['email'];
-    $contact = $_POST['contact'];    
+    $contact = $_POST['contact'];
+    $sql2 = "UPDATE users SET
+                name='$name',
+                email='$email',
+                contact='$contact'
+                WHERE id='$id'";
 }
 
 ?>
