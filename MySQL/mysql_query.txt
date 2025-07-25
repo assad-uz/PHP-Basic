@@ -1,7 +1,5 @@
 Q: mysqli_query() কী?
-A: mysqli_query() হল একটি PHP ফাংশন, যেটা দিয়ে MySQL ডেটাবেইসে SQL কুয়েরি পাঠানো হয়।
-
-- এটি PHP এবং MySQL-এর মধ্যে যোগাযোগ করিয়ে দেয়।
+A: mysqli_query() হল একটি PHP ফাংশন, যেটা দিয়ে MySQL ডেটাবেইসে SQL কুয়েরি পাঠানো হয়। এটি PHP এবং MySQL-এর মধ্যে যোগাযোগ করিয়ে দেয়।
 
 - Syntax:
 

@@ -6,7 +6,7 @@ if(isset($_POST['submit'])){
     $c = $_POST['contact'];
     $sql= "INSERT INTO users (name,email,contact) VALUES ($n,$e,$c)";
 
-    
+
 }
 
 ?>
@@ -15,7 +15,8 @@ if(isset($_POST['submit'])){
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Medium Size Bootstrap Form</title>
+  <!-- <title>Medium Size Bootstrap Form</title> -->
+  <title>Input Form</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
