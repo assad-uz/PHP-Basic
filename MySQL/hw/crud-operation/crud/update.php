@@ -26,6 +26,12 @@ if(isset($_POST['edit'])){
                 email='$email',
                 contact='$contact'
                 WHERE id='$id'";
+    
+    if(mysqli_query($connt,$sql2)){
+        echo "Data Updated Successfully!";
+    }else{
+        echo $sql2 . "Data not update";
+    }
 }
 
 ?>
