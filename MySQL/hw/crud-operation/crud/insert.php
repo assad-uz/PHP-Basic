@@ -4,16 +4,18 @@ if(isset($_POST['submit'])){
     $n = $_POST['name'];
     $e = $_POST['email'];
     $c = $_POST['contact'];
-    $sql= "INSERT INTO users (name,email,contact) VALUES ($n,$e,$c)";
+    $sql= "INSERT INTO users (name,email,contact) VALUES ('$n','$e','$c')";
 
     if(mysqli_query($connt,$sql)==true){
         echo "Data inserted";
         header('location: view.php');
+        exit;  // redirect এর পর exit না দিলে সমস্যা হতে পারে।
     }else{
         echo "Data not inserted";
     }
+}else {
+    echo "Form not submitted!";
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +30,7 @@ if(isset($_POST['submit'])){
   <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="card shadow p-4" style="width: 100%; max-width: 500px;">
       <h3 class="mb-4 text-center">User Contact Form</h3>
-      <form action="process.php" method="POST">
+      <form action="insert.php" method="POST">
         <div class="mb-3">
           <label for="name" class="form-label">Name:</label>
           <input type="text" class="form-control" id="name" name="name" required>
