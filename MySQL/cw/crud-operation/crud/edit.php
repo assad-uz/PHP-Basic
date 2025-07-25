@@ -27,10 +27,11 @@ if (isset($_POST['edit'])) {
                  contact='$contact'
             where id = '$id' ";
     if (mysqli_query($conn, $sql1) == TRUE) {
-        header('location:delete.php');
         echo "DATA update";
+        header('location:delete.php');
+        exit;
     } else {
-        echo $sqli1 . "Data not update";
+        echo $sql1 . "Data not update";
     }
 }
 

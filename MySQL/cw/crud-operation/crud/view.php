@@ -3,8 +3,8 @@
 mysql_fetch_array() - Fetch a result row as an associative array, a numeric array, or both
 mysql_fetch_assoc() - Fetch a result row as an associative array
 mysql_fetch_object() - Fetch a result row as an object
-mysql_data_seek() - Move internal result pointer
 mysql_fetch_lengths() - Get the length of each output in a result
+mysql_data_seek() - Move internal result pointer
 mysql_result() - Get result data
 	</pre>
 </h1>
