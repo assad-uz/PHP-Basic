@@ -1,6 +1,11 @@
 <?php 
 $connt= mysqli_connect("localhost","root","","e_commerce");
 if(isset($_POST['submit'])){
+    $n = $_POST['name'];
+    $e = $_POST['email'];
+    $c = $_POST['contact'];
+    $sql= "INSERT INTO users (name,email,contact) VALUES ($n,$e,$c)";
+
     
 }
 
