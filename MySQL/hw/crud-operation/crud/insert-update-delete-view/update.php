@@ -50,20 +50,22 @@ if(isset($_POST['edit'])){
   <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="card shadow p-4" style="width: 100%; max-width: 500px;">
       <h3 class="mb-4 text-center">Update User Information</h3>
-      <form action="delete.php" method="POST">
+      <form action="update.php" method="POST">
+        <input type="hidden" name="id" value="<?= $id ?>">
         <div class="mb-3">
           <label for="name" class="form-label">Name:</label>
-          <input type="text" class="form-control" id="name" name="name" >
+          <input type="text" class="form-control" id="name" name="name" value="<?php echo $name ?>">
         </div>
 
         <div class="mb-3">
           <label for="email" class="form-label">Email:</label>
-          <input type="email" class="form-control" id="email" name="email" >
+          <input type="email" class="form-control" id="email" name="email" value="<?php echo $email ?>">
         </div>
 
         <div class="mb-3">
           <label for="contact" class="form-label">Contact:</label>
-          <input type="text" class="form-control" id="contact" name="contact" >
+          <input type="text" class="form-control" id="contact" name="contact" value="<?php echo $contact ?>">
+           <!-- <input type ="text" name ="id" value =" <?php echo $id ?>" hidden><br><br> //new -->
         </div>
         <div class="mb-3">
             <input type="submit" name="edit" value="Update Data" class="btn btn-primary">
