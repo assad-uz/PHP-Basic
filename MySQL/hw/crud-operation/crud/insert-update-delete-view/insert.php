@@ -8,7 +8,7 @@ if(isset($_POST['submit'])){
 
     if(mysqli_query($connt,$sql)==true){
         echo "Data inserted";
-        header('location: view.php');
+        header('location: delete.php');
         exit;  // redirect এর পর exit না দিলে সমস্যা হতে পারে।
     }else{
         echo "Data not inserted";

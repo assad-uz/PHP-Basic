@@ -4,6 +4,7 @@ if(isset($_GET['deleteid'])){
     $delete_id = $_GET['deleteid'];
     $sql = "DELETE FROM users WHERE id=$delete_id";
     if(mysqli_query($connt,$sql)==true){
+        echo "Delete Successful!";
         header('location: delete.php');
         exit;
     }
@@ -45,7 +46,7 @@ if(isset($_GET['deleteid'])){
                                 <td>$_email</td>
                                 <td>$_contact</td>
                                 <td>
-                                    <a href='update.php?id=$_id'>Delete</a> | 
+                                    <a href='update.php?id=$_id'>Update</a> | 
                                     <a href='delete.php?deleteid=$_id'>Delete</a>
                                 </td>
                               </tr>";

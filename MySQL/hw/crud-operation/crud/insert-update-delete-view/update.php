@@ -49,21 +49,21 @@ if(isset($_POST['edit'])){
 <body>
   <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="card shadow p-4" style="width: 100%; max-width: 500px;">
-      <h3 class="mb-4 text-center">User Contact Form</h3>
-      <form action="insert.php" method="POST">
+      <h3 class="mb-4 text-center">Update User Information</h3>
+      <form action="delete.php" method="POST">
         <div class="mb-3">
           <label for="name" class="form-label">Name:</label>
-          <input type="text" class="form-control" id="name" name="name" required>
+          <input type="text" class="form-control" id="name" name="name" >
         </div>
 
         <div class="mb-3">
           <label for="email" class="form-label">Email:</label>
-          <input type="email" class="form-control" id="email" name="email" required>
+          <input type="email" class="form-control" id="email" name="email" >
         </div>
 
         <div class="mb-3">
           <label for="contact" class="form-label">Contact:</label>
-          <input type="text" class="form-control" id="contact" name="contact" required>
+          <input type="text" class="form-control" id="contact" name="contact" >
         </div>
         <div class="mb-3">
             <input type="submit" name="edit" value="Update Data" class="btn btn-primary">
