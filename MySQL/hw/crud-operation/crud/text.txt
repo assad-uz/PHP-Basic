@@ -1,0 +1,3 @@
+2 types of view:
+1. PHP view
+2. MySQL view
