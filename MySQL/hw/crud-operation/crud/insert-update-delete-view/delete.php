@@ -1,4 +1,14 @@
-
+<?php
+$connt = mysqli_connect('localhost','root','','e_commerce');
+if(isset($_GET['deleteid'])){
+    $delete_id = $_GET['deleteid'];
+    $sql = "DELETE FROM users WHERE id=$delete_id";
+    if(mysqli_query($connt,$sql)==true){
+        header('location: delete.php');
+        exit;
+    }
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
