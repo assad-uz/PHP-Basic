@@ -1,11 +1,12 @@
 <?php 
 $connt= mysqli_connect("localhost","root","","tech_company");
+
 if(isset($_POST['submit'])){
     $b = $_POST['brand'];
     $c = $_POST['country'];
 
     // Stored Procedure Call
-    $store = $connt->query("CALL insert('$b','$c')");
+    $store = $connt->query("call call_insert('$b','$c')");
     if($store){
         echo "Data inserted";
         header('location: view.php');
@@ -31,15 +32,15 @@ if(isset($_POST['submit'])){
   <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="card shadow p-4" style="width: 100%; max-width: 500px;">
       <h3 class="mb-4 text-center">User Contact Form</h3>
-      <form action="insert.php" method="POST">
+      <form action="#" method="POST">
         <div class="mb-3">
           <label for="brand" class="form-label">Brand:</label>
-          <input type="text" class="form-control" id="brand" brand="brand" required>
-        </div>
+          <input type="text" class="form-control" id="brand" name="brand" required>
+        </div> 
 
         <div class="mb-3">
           <label for="country" class="form-label">Country:</label>
-          <input type="country" class="form-control" id="country" name="country" required>
+          <input type="text" class="form-control" id="country" name="country" required>
         </div>
 
         <button type="submit" class="btn btn-primary w-100" name="submit">Submit</button>
