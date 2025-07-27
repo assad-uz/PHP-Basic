@@ -4,7 +4,7 @@ if(isset($_POST['submit'])){
     $b = $_POST['brand'];
     $c = $_POST['country'];
 
-    
+    $connt->query("CALL insert('$b','$c')");
     if(mysqli_query($connt,$sql)==true){
         echo "Data inserted";
         header('location: view.php');

@@ -1,5 +1,5 @@
 <?php
-$connt = mysqli_connect("localhost", "root", "", "e_commerce");
+$connt = mysqli_connect("localhost", "root", "", "tech_company");
 ?>
 
 <!DOCTYPE html>
@@ -20,10 +20,8 @@ $connt = mysqli_connect("localhost", "root", "", "e_commerce");
             <table class="table table-bordered table-hover text-center">
                 <thead class="table-dark">
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Contact</th>
+                        <th>Brand</th>
+                        <th>Country</th>
                     </tr>
                 </thead>
                 <tbody>
