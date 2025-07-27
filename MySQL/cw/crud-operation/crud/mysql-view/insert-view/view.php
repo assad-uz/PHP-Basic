@@ -20,19 +20,19 @@ $connt = mysqli_connect("localhost", "root", "", "tech_company");
             <table class="table table-bordered table-hover text-center">
                 <thead class="table-dark">
                     <tr>
+                        <th>ID</th>
                         <th>Brand</th>
                         <th>Country</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    $user = $connt->query("SELECT * FROM users");
-                    while(list($_id,$_name,$_email,$_contact) = $user->fetch_row()){
+                    $manufacture = $connt->query("SELECT * FROM manufactures");
+                    while(list($_id,$_brand,$_country) = $manufacture->fetch_row()){
                         echo "<tr>
                                 <td>$_id</td>
-                                <td>$_name</td>
-                                <td>$_email</td>
-                                <td>$_contact</td>
+                                <td>$_brand</td>
+                                <td>$_country</td>
                               </tr>";
                     }
                     ?>
