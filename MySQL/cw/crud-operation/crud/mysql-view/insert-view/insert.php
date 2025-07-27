@@ -4,13 +4,14 @@ if(isset($_POST['submit'])){
     $b = $_POST['brand'];
     $c = $_POST['country'];
 
-    $connt->query("CALL insert('$b','$c')");
-    if(mysqli_query($connt,$sql)==true){
+    // Stored Procedure Call
+    $store = $connt->query("CALL insert('$b','$c')");
+    if($store){
         echo "Data inserted";
         header('location: view.php');
         exit;  // redirect এর পর exit না দিলে সমস্যা হতে পারে।
     }else{
-        echo "Data not inserted";
+        echo "Data not inserted" . $connt->error; 
     }
 }
 // else {

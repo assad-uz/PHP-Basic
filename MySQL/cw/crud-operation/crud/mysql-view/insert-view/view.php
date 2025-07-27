@@ -1,5 +1,8 @@
 <?php
 $connt = mysqli_connect("localhost", "root", "", "tech_company");
+if (!$connt) {
+    die("Connection failed: " . mysqli_connect_error());
+}
 ?>
 
 <!DOCTYPE html>
