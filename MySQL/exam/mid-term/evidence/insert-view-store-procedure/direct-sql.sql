@@ -1,3 +1,22 @@
+-- create table manufacturer
+CREATE TABLE manufacture (
+    product_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    price DECIMAL(10,2),
+    manufacturer_id INT,
+    FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(manufacturer_id)
+);
+
+-- create table product
+CREATE TABLE product (
+    product_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    price DECIMAL(10,2),
+    manufacturer_id INT,
+    FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(manufacturer_id)
+);
+
+
 -- insert manufacturer
 DELIMITER //
 
