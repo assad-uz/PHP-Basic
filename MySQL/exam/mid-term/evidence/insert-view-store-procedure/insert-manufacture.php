@@ -10,8 +10,8 @@ if(isset($_POST['submit'])){
     $store = $connt->query("call call_insert('$n','$a','$c')");
     if($store){
         echo "Data inserted";
-        header('location: view.php');
-        exit;
+        // header('location: view.php');
+        // exit;
     }else{
         echo "Data not inserted" . $connt->error; 
     }
@@ -29,7 +29,7 @@ if(isset($_POST['submit'])){
 <body>
   <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="card shadow p-4" style="width: 100%; max-width: 500px;">
-      <h3 class="mb-4 text-center">User Contact Form</h3>
+      <h3 class="mb-4 text-center">Manufacturer Contact Form</h3>
       <form action="#" method="POST">
         <div class="mb-3">
           <label for="name" class="form-label">Name:</label>
