@@ -1,10 +1,9 @@
 -- create table manufacturer
-CREATE TABLE manufacture (
-    product_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100),
-    price DECIMAL(10,2),
-    manufacturer_id INT,
-    FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(manufacturer_id)
+CREATE TABLE manufacturer (
+    manufacturer_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50),
+    address VARCHAR(100),
+    contact_no VARCHAR(50),
 );
 
 -- create table product
