@@ -31,7 +31,7 @@ if(isset($_POST['submit'])){
 <body>
   <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="card shadow p-4" style="width: 100%; max-width: 500px;">
-      <h3 class="mb-4 text-center">Manufacturer Contact Form</h3>
+      <h3 class="mb-4 text-center">Product Information</h3>
       <form action="#" method="POST">
         <div class="mb-3">
           <label for="name" class="form-label">Name:</label>

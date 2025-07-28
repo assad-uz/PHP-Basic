@@ -1,4 +1,11 @@
--- create table manufacturer
+-- Drop existing database if needed
+DROP DATABASE IF EXISTS manufacture_company;
+
+-- Create Database
+CREATE DATABASE manufacture_company;
+USE manufacture_company;
+
+-- create manufacturer table
 CREATE TABLE manufacturer (
     manufacturer_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50),
@@ -6,7 +13,7 @@ CREATE TABLE manufacturer (
     contact_no VARCHAR(50),
 );
 
--- create table product
+-- create product table with foreign key
 CREATE TABLE product (
     product_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100),
@@ -27,10 +34,10 @@ ON DELETE CASCADE;
 কোথায় চালাবে > phpMyAdmin > SQL tab 
 */
 
--- insert manufacturer
+-- Create Stored Procedure: Insert Manufacturer
 DELIMITER //
-
-CREATE PROCEDURE insert_manufacturer(
+DROP PROCEDURE IF EXISTS call_insert_m;
+CREATE PROCEDURE call_insert_m(
     IN m_name VARCHAR(50),
     IN m_address VARCHAR(100),
     IN m_contact VARCHAR(50)
@@ -40,7 +47,21 @@ BEGIN
     VALUES(m_name, m_address, m_contact);
 END;
 //
+DELIMITER;
 
-DELIMITER ;
+-- Create Stored Procedure: Insert Product
+DELIMITER //
+DROP PROCEDURE IF EXISTS call_insert_p;
+CREATE PROCEDURE call_insert_p(
+    IN rname VARCHAR(50),
+    IN rprice INT(5),
+    IN rmanufacture_id INT(10)
+)
+BEGIN
+    INSERT INTO product(name, price, manufacture_id)
+    VALUES (rname, rprice, rmanufacture_id);
+END;
+//
+DELIMITER;
 
 
