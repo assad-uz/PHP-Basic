@@ -1,23 +1,21 @@
 <?php 
-$connt= mysqli_connect("localhost","root","","tech_company");
+$connt= mysqli_connect("localhost","root","","manufacture_company");
 
 if(isset($_POST['submit'])){
-    $b = $_POST['brand'];
-    $c = $_POST['country'];
+    $n = $_POST['name'];
+    $a = $_POST['address'];
+    $c = $_POST['contact_no'];
 
     // Stored Procedure Call
-    $store = $connt->query("call call_insert('$b','$c')");
+    $store = $connt->query("call call_insert('$n','$a','$c')");
     if($store){
         echo "Data inserted";
         header('location: view.php');
-        exit;  // redirect এর পর exit না দিলে সমস্যা হতে পারে।
+        exit;
     }else{
         echo "Data not inserted" . $connt->error; 
     }
 }
-// else {
-//     echo "Form not submitted!";
-// }
 ?>
 
 <!DOCTYPE html>
@@ -34,15 +32,20 @@ if(isset($_POST['submit'])){
       <h3 class="mb-4 text-center">User Contact Form</h3>
       <form action="#" method="POST">
         <div class="mb-3">
-          <label for="brand" class="form-label">Brand:</label>
-          <input type="text" class="form-control" id="brand" name="brand" required>
+          <label for="name" class="form-label">Name:</label>
+          <input type="text" class="form-control" id="name" name="name" required>
         </div> 
 
         <div class="mb-3">
-          <label for="country" class="form-label">Country:</label>
-          <input type="text" class="form-control" id="country" name="country" required>
+          <label for="address" class="form-label">Address:</label>
+          <input type="text" class="form-control" id="address" name="address" required>
         </div>
 
+        <div class="mb-3">
+          <label for="contact_no" class="form-label">contact_no:</label>
+          <input type="text" class="form-control" id="contact_no" name="contact_no" required>
+        </div>
+        
         <button type="submit" class="btn btn-primary w-100" name="submit">Submit</button>
       </form>
     </div>
