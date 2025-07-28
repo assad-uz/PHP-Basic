@@ -19,11 +19,11 @@ CREATE TABLE product (
 তাহলে তুমি ALTER TABLE দিয়ে foreign key অ্যাড করতে পারো:
 
 ALTER TABLE product
-ADD CONSTRAINT cn_manufacturer
+ADD CONSTRAINT fk_manufacturer
 FOREIGN KEY (manufacturer_id) 
 REFERENCES manufacturer(manufacturer_id)
 ON DELETE CASCADE;
-এখানে cn_manufacturer হচ্ছে constraint এর একটা নাম (তুমি যেকোনো নাম দিতে পারো)
+এখানে fk_manufacturer হচ্ছে constraint এর একটা নাম (তুমি যেকোনো নাম দিতে পারো)
 কোথায় চালাবে > phpMyAdmin > SQL tab 
 */
 

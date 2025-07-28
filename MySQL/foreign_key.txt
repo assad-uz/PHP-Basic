@@ -1,5 +1,6 @@
 Q: FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(manufacturer_id) এর মানে কী?
 A:
+Syntax: FOREIGN KEY (child_column) REFERENCES parent_table(parent_column)
 
 🔑 এটি হলো: Foreign Key Constraint
 এটি দুইটা টেবিলের মধ্যে সম্পর্ক (relationship) তৈরি করে।
@@ -37,3 +38,29 @@ FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(manufacturer_id) ON DELETE
 
 এর মানে:
 যদি কোনো manufacturer ডিলিট করা হয়, তাহলে তার সব পণ্য আপনা আপনি মুছে যাবে
+
+---------------------------
+Additional Options:
+
+ON DELETE CASCADE – deletes child rows when parent is deleted.
+
+ON UPDATE CASCADE – updates child rows when parent is updated.
+
+---------------------------
+🔁 ON DELETE CASCADE
+এর মানে হলো, যদি manufacturer টেবিল থেকে কোনো row (উদাহরণস্বরূপ, একটি manufacturer) ডিলিট করা হয়, তাহলে products বা যেখানে এই foreign key ব্যবহৃত হচ্ছে সেখান থেকেও ঐ manufacturer_id এর সাথে সম্পর্কিত সব row স্বয়ংক্রিয়ভাবে ডিলিট হয়ে যাবে।
+
+🔸 উদাহরণ:
+manufacturer টেবিল থেকে manufacturer_id = 5 ডিলিট করলে, products টেবিলে যেসব row-এ manufacturer_id = 5 আছে, সেগুলোও ডিলিট হয়ে যাবে।
+FOREIGN KEY (child_column) REFERENCES parent_table(parent_column) ON DELETE CASCADE
+
+---------------------------
+🔄 ON UPDATE CASCADE
+এর মানে হলো, যদি manufacturer টেবিলের manufacturer_id আপডেট করা হয়, তাহলে যেসব টেবিল এই foreign key ব্যবহার করছে (যেমন: products), সেখানেও স্বয়ংক্রিয়ভাবে সেই পরিবর্তন হয়ে যাবে।
+
+🔸 উদাহরণ:
+manufacturer_id = 5 থেকে manufacturer_id = 10 করা হলে, products টেবিলে যেসব row-এ manufacturer_id = 5 ছিল, সেগুলোও আপডেট হয়ে 10 হয়ে যাবে।
+FOREIGN KEY (child_column) REFERENCES parent_table(parent_column) ON UPDATE CASCADE
+
+-----------------------------
+Both: FOREIGN KEY (child_column) REFERENCES parent_table(parent_column) ON DELETE CASCADE ON UPDATE CASCADE
