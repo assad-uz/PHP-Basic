@@ -7,7 +7,7 @@ if(isset($_POST['submit'])){
     $c = $_POST['contact_no'];
 
     // Stored Procedure Call
-    $store = $connt->query("call call_insert('$n','$a','$c')");
+    $store = $connt->query("call call_insert_m('$n','$a','$c')");
     if($store){
         echo "Data inserted";
         // header('location: view.php');

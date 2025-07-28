@@ -4,11 +4,11 @@ $connt= mysqli_connect("localhost","root","","manufacture_company");
 
 if(isset($_POST['submit'])){
     $n = $_POST['name'];
-    $a = $_POST['address'];
-    $c = $_POST['contact_no'];
+    $p = $_POST['price'];
+    $m_id = $_POST['manufacture_id'];
 
     // Stored Procedure Call
-    $store = $connt->query("call call_insert('$n','$a','$c')");
+    $store = $connt->query("call call_insert_p('$n','$p','$m_id')");
     if($store){
         echo "Data inserted";
         // header('location: view.php');
@@ -39,13 +39,13 @@ if(isset($_POST['submit'])){
         </div> 
 
         <div class="mb-3">
-          <label for="product" class="form-label">Product:</label>
-          <input type="text" class="form-control" id="product" name="product" required>
+          <label for="price" class="form-label">Price:</label>
+          <input type="text" class="form-control" id="price" name="price" required>
         </div>
 
         <div class="mb-3">
-          <label for="contact_no" class="form-label">contact_no:</label>
-          <input type="text" class="form-control" id="contact_no" name="contact_no" required>
+          <label for="manufacture_id" class="form-label">manufacture_id:</label>
+          <input type="text" class="form-control" id="manufacture_id" name="manufacture_id" required>
         </div>
         
         <button type="submit" class="btn btn-primary w-100" name="submit">Submit</button>
