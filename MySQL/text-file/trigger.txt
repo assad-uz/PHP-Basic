@@ -5,7 +5,7 @@ CREATE TRIGGER trigger_name
 ON table_name
 FOR EACH ROW
 BEGIN
-    -- trigger body (multiple SQL statements)
+    -- trigger body (multiple SQL statements- এখানেই SQL INSERT | UPDATE | DELETE Syntax বসবে)
 END;
 
 -------------------------------
@@ -69,3 +69,27 @@ VALUES ('Mouse', 500);
 - কোনো নাম দিয়ে EXECUTE বা CALL করা যায় না
 
 - এটা table-এর event এর সাথে bind করা
+
+
+------------------------------------------
+✅ MySQL AFTER DELETE Trigger (তোমার চাওয়া অনুযায়ী):
+
+CREATE TRIGGER after_delete_manufacturer
+AFTER DELETE ON manufacturer
+FOR EACH ROW
+BEGIN
+    DELETE FROM product
+    WHERE manufacture_id = OLD.id;
+END;
+
+🔍 ব্যাখ্যা:
+- AFTER DELETE ON manufacturer: যখনই কোনো manufacturer ডিলিট হবে
+
+OLD.id: ডিলিট হওয়া রেকর্ডের manufacturer-এর ID
+
+DELETE FROM product ...: সেই manufacturer_id-এর সাথে সম্পর্কযুক্ত সব প্রোডাক্ট মুছে ফেলবে
+
+⚠️ গুরুত্বপূর্ণ শর্ত:
+এই trigger চলবে তখনই যখন:
+
+manufacturer.id এবং product.manufacture_id এর মধ্যে সম্পর্ক (foreign key) থাকে বা manually ম্যানেজ করা হয়

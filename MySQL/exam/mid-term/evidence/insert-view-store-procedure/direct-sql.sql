@@ -67,5 +67,13 @@ DELIMITER;
 -- Create Stored Procedure: Update Product
 
 -- Create Stored Procedure: Delete Product using Trigger
+CREATE TRIGGER after_delete_manufacturer
+AFTER DELETE ON manufacturer
+FOR EACH ROW
+BEGIN
+    DELETE FROM product
+    WHERE manufacture_id = OLD.id;
+END;
+
 
 
