@@ -7,7 +7,7 @@ USE manufacture_company;
 
 -- create manufacturer table
 CREATE TABLE manufacturer (
-    manufacturer_id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50),
     address VARCHAR(100),
     contact_no VARCHAR(50),
@@ -17,9 +17,9 @@ CREATE TABLE manufacturer (
 CREATE TABLE product (
     product_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100),
-    price DECIMAL(10,2),
-    manufacturer_id INT,
-    FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(manufacturer_id)
+    price INT(5),
+    manufacturer_id INT(10),
+    FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(id)
 );
 /*
  যদি product টেবিল আগে থেকেই থাকে?
@@ -63,5 +63,9 @@ BEGIN
 END;
 //
 DELIMITER;
+
+-- Create Stored Procedure: Update Product
+
+-- Create Stored Procedure: Delete Product using Trigger
 
 

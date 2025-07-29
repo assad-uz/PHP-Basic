@@ -1,0 +1,71 @@
+Syntax: 
+
+CREATE TRIGGER trigger_name
+{BEFORE | AFTER} {INSERT | UPDATE | DELETE}
+ON table_name
+FOR EACH ROW
+BEGIN
+    -- trigger body (multiple SQL statements)
+END;
+
+-------------------------------
+🔍 ব্যাখ্যা:
+
+    অংশ	                                               অর্থ
+trigger_name                                        ট্রিগারের নাম
+BEFORE বা AFTER	কখন trigger চলবে         INSERT/UPDATE/DELETE এর আগে না পরে
+INSERT/UPDATE/DELETE                    	কোন event ঘটলে trigger চালু হবে
+table_name	                               কোন টেবিলের জন্য trigger তৈরি হবে
+FOR EACH ROW                            	প্রতিটি row-এর জন্য trigger চালু হবে
+BEGIN ... END	                        trigger body যেখানে SQL command থাকবে
+
+
+--------------------------------
+🔁 OLD এবং NEW কী?
+Trigger এর ভিতরে তুমি OLD এবং NEW ব্যবহার করে ডেটা access করতে পারো:
+
+Trigger Type	                        OLD.column              	NEW.column
+BEFORE INSERT / AFTER INSERT	        ❌ নেই	            ✅ নতুন ইনসার্ট হওয়া মান
+BEFORE UPDATE / AFTER UPDATE	       ✅ পুরানো মান               ✅ নতুন মান
+BEFORE DELETE / AFTER DELETE	    ✅ ডিলিট হওয়া রেকর্ড	            ❌ নেই
+
+
+--------------------------------
+🔒 Trigger — এক ধরনের auto-executed logic block
+Trigger কেবলমাত্র নিচের কাজগুলোর সময় স্বয়ংক্রিয়ভাবে execute হয়:
+
+INSERT
+
+UPDATE
+
+DELETE
+
+👉 তুমি trigger কে CALL trigger_name(); এর মতো করে সরাসরি চালাতে পারো না।
+
+✅ তাহলে কিভাবে Trigger "ব্যবহার" করবো?
+
+🔹 Step 1: প্রথমে Trigger তৈরি করো
+
+CREATE TRIGGER after_insert_log
+AFTER INSERT ON product
+FOR EACH ROW
+BEGIN
+    INSERT INTO product_log(product_id, name, created_at)
+    VALUES (NEW.id, NEW.name, NOW());
+END;
+
+🔹 Step 2: এখন যেকোনো INSERT করলেই Trigger নিজে চালু হবে
+
+INSERT INTO product(name, price)
+VALUES ('Mouse', 500);
+➡️ উপরের query চালালে product_log টেবিলে অটো-লগ হয়ে যাবে — কারণ trigger কাজ করেছে।
+
+
+🚫 কেন Trigger কে CALL দিয়ে চালানো যায় না?
+কারণ trigger:
+
+- কোনো আলাদা "function" না
+
+- কোনো নাম দিয়ে EXECUTE বা CALL করা যায় না
+
+- এটা table-এর event এর সাথে bind করা
