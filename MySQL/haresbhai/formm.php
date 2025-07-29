@@ -1,79 +1,78 @@
-<?php 
+
+<?php
 ob_start();
-
-// ✅ 1. Turn on detailed MySQLi error reporting
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-
-try {
-  $conn = new mysqli("localhost", "root", "", "new_exam");
-  $conn->set_charset("utf8mb4");
-} catch (Exception $e) {
-  die("Connection failed: " . $e->getMessage());
+$conn = new mysqli("localhost", "root", "", "db_driven_webapp");
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
 }
 
-// ✅ 2. Insert Manufacturer
+// Insert Manufacturer
 if (isset($_POST['submit_manufacturer'])) {
-  $stmt = $conn->prepare("CALL insert_manufacturer(?, ?, ?)");
-  $stmt->bind_param("sss", $_POST['name'], $_POST['address'], $_POST['contact_no']);
-  $stmt->execute();
-  $stmt->close();
-  header("Location: ?added_manufacturer=1&page=view_manufacturer");
-  exit;
+  $name = $_POST['name'];
+  $address = $_POST['address'];
+  $contact_no = $_POST['contact_no'];
+  $sql = "CALL insert_manufacturer('$name', '$address', '$contact_no')";
+  if ($conn->query($sql) === TRUE) {
+    header("Location: ?added_manufacturer=1&page=view_manufacturer");
+    exit;
+  } else { echo "Error: " . $conn->error; }
 }
 
-// ✅ 3. Insert Product
+// Insert Product
 if (isset($_POST['submit_product'])) {
-  $stmt = $conn->prepare("CALL insert_product(?, ?, ?)");
-  $stmt->bind_param("sii", $_POST['product_name'], $_POST['product_price'], $_POST['manufacturer_id']);
-  $stmt->execute();
-  $stmt->close();
-  header("Location: ?added_product=1&page=view");
-  exit;
+  $pname = $_POST['product_name'];
+  $pprice = $_POST['product_price'];
+  $mid = $_POST['manufacturer_id'];
+  $sql = "CALL insert_product('$pname', $pprice, $mid)";
+  if ($conn->query($sql) === TRUE) {
+    header("Location: ?added_product=1&page=view");
+    exit;
+  } else { echo "Error: " . $conn->error; }
 }
 
-// ✅ 4. Update Product
+// Update Product
 if (isset($_POST['update'])) {
-  $stmt = $conn->prepare("CALL update_product(?, ?, ?)");
-  $stmt->bind_param("isi", $_POST['id'], $_POST['name'], $_POST['price']);
-  $stmt->execute();
-  $stmt->close();
-  header("Location: ?updated_product=1&page=view");
-  exit;
+  $id = $_POST['id'];
+  $name = $_POST['name'];
+  $price = $_POST['price'];
+  $sql = "CALL update_product($id, '$name', $price)";
+  if ($conn->query($sql) === TRUE) {
+    header("Location: ?updated_product=1&page=view");
+    exit;
+  } else { echo "Error: " . $conn->error; }
 }
 
-// ✅ 5. Delete Product
+// Delete Product
 if (isset($_GET['delete_id'])) {
-  $stmt = $conn->prepare("CALL delete_product(?)");
-  $stmt->bind_param("i", $_GET['delete_id']);
-  $stmt->execute();
-  $stmt->close();
-  header("Location: ?deleted_product=1&page=view");
-  exit;
+  $id = $_GET['delete_id'];
+  $sql = "CALL delete_product($id)";
+  if ($conn->query($sql) === TRUE) {
+    header("Location: ?deleted_product=1&page=view");
+    exit;
+  } else { echo "Error: " . $conn->error; }
 }
 
-// ✅ 6. Delete Manufacturer (trigger handles child rows)
+// Delete Manufacturer (Trigger auto deletes related products)
 if (isset($_GET['delete_manufacturer_id'])) {
-  $stmt = $conn->prepare("DELETE FROM manufacturer WHERE id = ?");
-  $stmt->bind_param("i", $_GET['delete_manufacturer_id']);
-  $stmt->execute();
-  $stmt->close();
-  header("Location: ?deleted_manufacturer=1&page=view_manufacturer");
-  exit;
+  $id = $_GET['delete_manufacturer_id'];
+  $sql = "DELETE FROM manufacturer WHERE id = $id";
+  if ($conn->query($sql) === TRUE) {
+    header("Location: ?deleted_manufacturer=1&page=view_manufacturer");
+    exit;
+  } else { echo "Error: " . $conn->error; }
 }
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>DB Driven Web App</title>
+  <title>Database Connect</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="bg-light">
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
   <div class="container">
     <a class="navbar-brand" href="form.php">Database Company</a>
@@ -89,10 +88,11 @@ if (isset($_GET['delete_manufacturer_id'])) {
 </nav>
 
 <div class="container">
-<?php
-$page = $_GET['page'] ?? 'home';
 
-if ($page === 'insert') {
+<?php
+$page = isset($_GET['page']) ? $_GET['page'] : 'home';
+
+if ($page == 'insert') {
   echo '
   <div class="card p-4 shadow">
     <h2><i class="fas fa-industry"></i> Add Manufacturer</h2>
@@ -103,8 +103,8 @@ if ($page === 'insert') {
       <button type="submit" name="submit_manufacturer" class="btn btn-primary"><i class="fas fa-plus"></i> Add</button>
     </form>
   </div>';
-} elseif ($page === 'add_product') {
-  $result = $conn->query("SELECT id, name FROM manufacturer");
+} elseif ($page == 'add_product') {
+  $manus = $conn->query("SELECT id, name FROM manufacturer");
   echo '
   <div class="card p-4 shadow">
     <h2><i class="fas fa-box"></i> Add Product</h2>
@@ -114,40 +114,47 @@ if ($page === 'insert') {
       <div class="mb-3"><label class="form-label">Select Manufacturer</label>
       <select name="manufacturer_id" class="form-select" required>
         <option value="">-- Select Manufacturer --</option>';
-  while ($row = $result->fetch_assoc()) {
-    echo '<option value="'.$row['id'].'">'.$row['name'].'</option>';
-  }
+        while ($row = $manus->fetch_assoc()) {
+          echo '<option value="'.$row['id'].'">'.$row['name'].'</option>';
+        }
   echo '</select></div>
       <button type="submit" name="submit_product" class="btn btn-success"><i class="fas fa-plus"></i> Add</button>
     </form>
   </div>';
-} elseif ($page === 'view') {
-  echo '<div class="card p-4 shadow"><h2>Products > 5000</h2>';
+} elseif ($page == 'view') {
+  echo '<div class="card p-4 shadow">';
+  echo '<h2 class="mb-4">Products > 5000</h2>';
 
+  // Fix: View এর জন্য SELECT ব্যবহার
   $res = $conn->query("SELECT * FROM expensive_products");
 
-  if ($res->num_rows > 0) {
-    echo "<table class='table table-striped'><thead class='table-dark'>
-      <tr><th>ID</th><th>Name</th><th>Price</th><th>Manufacturer</th><th>Action</th></tr>
+  if ($res && $res->num_rows > 0) {
+    echo "<table class='table table-striped'>
+      <thead class='table-dark'>
+        <tr><th>ID</th><th>Name</th><th>Price</th><th>Manufacturer</th><th>Action</th></tr>
       </thead><tbody>";
     while ($row = $res->fetch_assoc()) {
-      echo "<tr><td>{$row['id']}</td><td>{$row['name']}</td><td>{$row['price']}</td><td>{$row['manufacturer_name']}</td>
+      echo "<tr>
+        <td>".$row['id']."</td>
+        <td>".$row['name']."</td>
+        <td>".$row['price']."</td>
+        <td>".$row['manufacturer_name']."</td>
         <td>
-          <button class='btn btn-sm btn-primary' data-bs-toggle='modal' data-bs-target='#editModal{$row['id']}'>Edit</button>
-          <button class='btn btn-sm btn-danger' onclick='deleteRecord({$row['id']})'>Delete</button>
+          <button class='btn btn-sm btn-primary' data-bs-toggle='modal' data-bs-target='#editModal".$row['id']."'>Edit</button>
+          <button class='btn btn-sm btn-danger' onclick='deleteRecord(".$row['id'].")'>Delete</button>
         </td></tr>
 
-      <div class='modal fade' id='editModal{$row['id']}' tabindex='-1'>
+      <div class='modal fade' id='editModal".$row['id']."' tabindex='-1'>
         <div class='modal-dialog'><div class='modal-content'>
         <form method='POST'>
           <div class='modal-header'><h5 class='modal-title'>Edit Product</h5>
           <button type='button' class='btn-close' data-bs-dismiss='modal'></button></div>
           <div class='modal-body'>
-            <input type='hidden' name='id' value='{$row['id']}'>
+            <input type='hidden' name='id' value='".$row['id']."'>
             <div class='mb-3'><label class='form-label'>Name</label>
-            <input type='text' name='name' class='form-control' value='{$row['name']}' required></div>
+            <input type='text' name='name' class='form-control' value='".$row['name']."' required></div>
             <div class='mb-3'><label class='form-label'>Price</label>
-            <input type='number' name='price' class='form-control' value='{$row['price']}' required></div>
+            <input type='number' name='price' class='form-control' value='".$row['price']."' required></div>
           </div>
           <div class='modal-footer'>
             <button type='submit' name='update' class='btn btn-success'>Update</button>
@@ -156,23 +163,21 @@ if ($page === 'insert') {
         </form></div></div></div>";
     }
     echo "</tbody></table>";
-  } else {
-    echo "<div class='alert alert-warning'>No products found.</div>";
-  }
+  } else { echo "<div class='alert alert-warning'>No products found.</div>"; }
   echo '</div>';
-} elseif ($page === 'view_manufacturer') {
-  echo '<div class="card p-4 shadow"><h2>Manufacturers</h2>';
+} elseif ($page == 'view_manufacturer') {
+  echo '<div class="card p-4 shadow">';
+  echo '<h2 class="mb-4">Manufacturers</h2>';
   $result = $conn->query("SELECT * FROM manufacturer");
   if ($result->num_rows > 0) {
-    echo "<table class='table table-striped'><thead class='table-dark'><tr><th>ID</th><th>Name</th><th>Address</th><th>Contact</th><th>Action</th></tr></thead><tbody>";
+    echo "<table class='table table-striped'>
+      <thead class='table-dark'><tr><th>ID</th><th>Name</th><th>Address</th><th>Contact</th><th>Action</th></tr></thead><tbody>";
     while ($row = $result->fetch_assoc()) {
-      echo "<tr><td>{$row['id']}</td><td>{$row['name']}</td><td>{$row['address']}</td><td>{$row['contact_no']}</td>
-      <td><button class='btn btn-sm btn-danger' onclick='deleteManufacturer({$row['id']})'>Delete</button></td></tr>";
+      echo "<tr><td>".$row['id']."</td><td>".$row['name']."</td><td>".$row['address']."</td><td>".$row['contact_no']."</td>
+      <td><button class='btn btn-sm btn-danger' onclick='deleteManufacturer(".$row['id'].")'>Delete</button></td></tr>";
     }
     echo "</tbody></table>";
-  } else {
-    echo "<div class='alert alert-warning'>No manufacturers found.</div>";
-  }
+  } else { echo "<div class='alert alert-warning'>No manufacturers found.</div>"; }
   echo '</div>';
 } else {
   echo '<div class="text-center">
@@ -199,12 +204,21 @@ function deleteManufacturer(id) {
 </script>
 
 <?php
-if (isset($_GET['added_manufacturer'])) echo "<script>Swal.fire({icon:'success',title:'Manufacturer Added!'});</script>";
-if (isset($_GET['added_product'])) echo "<script>Swal.fire({icon:'success',title:'Product Added!'});</script>";
-if (isset($_GET['updated_product'])) echo "<script>Swal.fire({icon:'success',title:'Product Updated!'});</script>";
-if (isset($_GET['deleted_product'])) echo "<script>Swal.fire({icon:'success',title:'Product Deleted!'});</script>";
-if (isset($_GET['deleted_manufacturer'])) echo "<script>Swal.fire({icon:'success',title:'Manufacturer Deleted!'});</script>";
-
+if (isset($_GET['added_manufacturer'])) {
+  echo "<script>Swal.fire({icon:'success',title:'Manufacturer Added!'});</script>";
+}
+if (isset($_GET['added_product'])) {
+  echo "<script>Swal.fire({icon:'success',title:'Product Added!'});</script>";
+}
+if (isset($_GET['updated_product'])) {
+  echo "<script>Swal.fire({icon:'success',title:'Product Updated!'});</script>";
+}
+if (isset($_GET['deleted_product'])) {
+  echo "<script>Swal.fire({icon:'success',title:'Product Deleted!'});</script>";
+}
+if (isset($_GET['deleted_manufacturer'])) {
+  echo "<script>Swal.fire({icon:'success',title:'Manufacturer Deleted!'});</script>";
+}
 $conn->close();
 ob_end_flush();
 ?>

@@ -1,31 +1,34 @@
--- Drop & recreate database
-DROP DATABASE IF EXISTS new_exam;
-CREATE DATABASE new_exam;
-USE new_exam;
 
--- Manufacturer table
+-- Drop existing database if needed
+DROP DATABASE IF EXISTS db_driven_webapp;
+
+-- Create Database
+CREATE DATABASE db_driven_webapp;
+USE db_driven_webapp;
+
+-- Manufacturer Table
 CREATE TABLE manufacturer (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(50) NOT NULL,
-  address VARCHAR(100) NOT NULL,
-  contact_no VARCHAR(50) NOT NULL
+  name VARCHAR(100) NOT NULL,
+  address VARCHAR(255) NOT NULL,
+  contact_no VARCHAR(20) NOT NULL
 );
 
--- Product table (No ON DELETE CASCADE, we’ll handle with trigger)
+-- Product Table with ON DELETE CASCADE
 CREATE TABLE product (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(50) NOT NULL,
-  price INT(5) NOT NULL,
-  manufacturer_id INT(10) NOT NULL,
-  FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(id)
+  name VARCHAR(100) NOT NULL,
+  price DECIMAL(10,2) NOT NULL,
+  manufacturer_id INT NOT NULL,
+  FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(id) -- ON DELETE CASCADE
 );
 
--- Insert Manufacturer SP
+-- Stored Procedure: Insert Manufacturer
 DELIMITER //
 CREATE PROCEDURE insert_manufacturer(
-  IN pname VARCHAR(50),
-  IN paddress VARCHAR(100),
-  IN pcontact VARCHAR(50)
+  IN pname VARCHAR(100),
+  IN paddress VARCHAR(255),
+  IN pcontact VARCHAR(20)
 )
 BEGIN
   INSERT INTO manufacturer(name, address, contact_no)
@@ -33,12 +36,12 @@ BEGIN
 END //
 DELIMITER ;
 
--- Insert Product SP
+-- Stored Procedure: Insert Product
 DELIMITER //
 CREATE PROCEDURE insert_product(
-  IN pname VARCHAR(50),
-  IN pprice INT(5),
-  IN mid INT(10)
+  IN pname VARCHAR(100),
+  IN pprice DECIMAL(10,2),
+  IN mid INT
 )
 BEGIN
   INSERT INTO product(name, price, manufacturer_id)
@@ -46,39 +49,39 @@ BEGIN
 END //
 DELIMITER ;
 
--- Update Product SP
+-- Stored Procedure: Update Product
 DELIMITER //
 CREATE PROCEDURE update_product(
   IN pid INT,
-  IN pname VARCHAR(50),
-  IN pprice INT(5)
+  IN pname VARCHAR(100),
+  IN pprice DECIMAL(10,2)
 )
 BEGIN
   UPDATE product SET name = pname, price = pprice WHERE id = pid;
 END //
 DELIMITER ;
 
--- Delete Product SP
-DELIMITER //
-CREATE PROCEDURE delete_product(
-  IN pid INT
-)
-BEGIN
-  DELETE FROM product WHERE id = pid;
-END //
-DELIMITER ;
+-- --  Stored Procedure: Delete Product
+-- DELIMITER //
+-- CREATE PROCEDURE delete_product(
+--   IN pid INT
+-- )
+-- BEGIN
+--   DELETE FROM product WHERE id = pid;
+-- END //
+-- DELIMITER ;
 
--- ✅ After DELETE Trigger
 DELIMITER //
-CREATE TRIGGER after_manufacturer_delete
+CREATE TRIGGER after_delete_manufacturer
 AFTER DELETE ON manufacturer
 FOR EACH ROW
 BEGIN
-  DELETE FROM product WHERE manufacturer_id = OLD.id;
-END //
-DELIMITER ;
+    DELETE FROM product
+    WHERE manufacture_id = OLD.id;
+END//
+DELIMITER;
 
--- ✅ View for products > 5000
+-- View: Expensive Products
 CREATE VIEW expensive_products AS
 SELECT 
   p.id,
@@ -98,6 +101,7 @@ SELECT
   contact_no
 FROM 
   manufacturer;
+
 
 
 --  Dummy Data Insert (optional)
@@ -122,3 +126,4 @@ CALL insert_product('Asus ROG', 95000, 7);
 CALL insert_product('Acer Aspire', 48000, 8);
 CALL insert_product('Lenovo ThinkPad', 72000, 9);
 CALL insert_product('Surface Pro', 90000, 10);
+
