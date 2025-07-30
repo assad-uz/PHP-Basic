@@ -8,10 +8,10 @@ if(isset($_POST['submit'])){
     $store = $connt->query("call call_insert_p('$n','$p','$m_id')");
 }
 // delete manufacturer with products
-if(isset($_POST['delmanufact'])){
-	$mid = $_POST['manufac'];
-	$db->query(" delete from manufacturer where id='$mid ' ");
-}
+// if(isset($_POST['delmanufact'])){
+// 	$mid = $_POST['manufac'];
+// 	$db->query(" delete from manufacturer where id='$mid ' ");
+// }
 ?>
 
 <!-- products form and views-->
@@ -29,32 +29,36 @@ if(isset($_POST['delmanufact'])){
       <form action="#" method="POST">
         <div class="mb-3">
           <label for="name" class="form-label">Name:</label>
-          <input type="text" class="form-control" id="name" name="name" required>
+          <input type="text" class="form-control" id="name" name="name">
         </div> 
 
         <div class="mb-3">
           <label for="price" class="form-label">Price:</label>
-          <input type="text" class="form-control" id="price" name="price" required>
+          <input type="text" class="form-control" id="price" name="price">
         </div>
 
 <div class="mb-3">
-  <label class="form-label">Manufacturer</label>
+  <label class="form-label">Manufacturer ID:</label>
   <select class="form-select" name="manufacture_id" required>
     <?php 
-      $manufac = $db->query("SELECT * FROM manufacturer");
+      $manufac = $connt->query("SELECT * FROM manufacturer");
       while(list($_mid, $_mname) = $manufac->fetch_row()) {
         echo "<option value='$_mid'>$_mname</option>";
       }
     ?>
   </select>
 </div>        
-        <button type="submit" class="btn btn-primary w-100" name="submit">Submit</button>
+<div class="d-flex gap-5"">
+    <button type="submit" class="btn btn-primary w-50" name="submit">Submit</button>
+    <button type="submit" class="btn btn-danger w-50" name="delmanufac">Delete</button>
+</div>
+        <!-- <input type="submit" name="delmanufact" value="Delete" class="btn btn-danger"> -->
       </form>
     </div>
   </div>
 
   <!-- after delete trigger -->
-<form action="#" method="post">
+<!-- <form action="#" method="post">
     Manufacturer: 
     <select name="manufacture_id" required>
         <?php 
@@ -65,7 +69,7 @@ if(isset($_POST['delmanufact'])){
         ?>
     </select><br>
     <input type="submit" name="delmanufact" value="Delete">
-</form>
+</form> -->
 
    
 
