@@ -42,7 +42,7 @@ if(isset($_POST['submit'])){
         </div>
 
         <div class="mb-3">
-          <label for="contact_no" class="form-label">contact_no:</label>
+          <label for="contact_no" class="form-label">Contact No:</label>
           <input type="text" class="form-control" id="contact_no" name="contact_no" required>
         </div>
         

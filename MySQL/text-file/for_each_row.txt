@@ -1,0 +1,5 @@
+FOR EACH ROW এর মানে:
+
+- প্রতিটা deleted row (manufacturer) এর জন্য এই ট্রিগার একবার করে চলবে
+
+- যদি একসাথে ৩টা manufacturer ডিলিট হয়, তাহলে ৩ বার DELETE FROM product ... চলবে
