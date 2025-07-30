@@ -1,4 +1,3 @@
-<!-- insert_manufacturer -->
 <?php 
 $connt= mysqli_connect("localhost","root","","manufacture_company");
 // add products
