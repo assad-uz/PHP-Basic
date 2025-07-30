@@ -10,8 +10,8 @@ if(isset($_POST['submit'])){
     $store = $connt->query("call call_insert_m('$n','$a','$c')");
     if($store){
         echo "Data inserted";
-        // header('location: view.php');
-        // exit;
+        header('location: insert-product.php');
+        exit;
     }else{
         echo "Data not inserted" . $connt->error; 
     }

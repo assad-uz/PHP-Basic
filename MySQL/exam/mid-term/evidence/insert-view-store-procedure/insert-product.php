@@ -1,21 +1,17 @@
 <!-- insert_manufacturer -->
 <?php 
 $connt= mysqli_connect("localhost","root","","manufacture_company");
-
+// add products
 if(isset($_POST['submit'])){
     $n = $_POST['name'];
     $p = $_POST['price'];
     $m_id = $_POST['manufacture_id'];
-
-    // Stored Procedure Call
     $store = $connt->query("call call_insert_p('$n','$p','$m_id')");
-    if($store){
-        echo "Data inserted";
-        // header('location: view.php');
-        // exit;
-    }else{
-        echo "Data not inserted" . $connt->error; 
-    }
+}
+// delete manufacturer with products
+if(isset($_POST['delmanufact'])){
+	$mid = $_POST['manufac'];
+	$db->query(" delete from manufacturer where id='$mid ' ");
 }
 ?>
 
