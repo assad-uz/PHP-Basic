@@ -206,17 +206,17 @@ if(isset($_POST['delete_m'])) {
             </tr>
           </thead>
           <tbody>
-            <?php 
-            $result = $connt->query("SELECT * FROM manufacturer");
-            while($row = $result->fetch_assoc()) {
-              echo "<tr>
-                <td>{$row['id']}</td>
-                <td>{$row['name']}</td>
-                <td>{$row['address']}</td>
-                <td>{$row['contact_no']}</td>
-              </tr>";
-            }
-            ?>
+      <?php 
+      $result = $connt->query("SELECT * FROM manufacturer");
+      while(list($_id,$_name,$_address,$_contact) = $result->fetch_row()) {
+        echo "<tr>
+          <td>$_id</td>
+          <td>$_name</td>
+          <td>$_address</td>
+          <td>$_contact</td>
+        </tr>";
+      }
+      ?>
           </tbody>
         </table>
       </div>
