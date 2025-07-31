@@ -89,7 +89,7 @@ WHERE m.id = p.manufacturer_id;
 END //
 DELIMITER ;
 
--- View Condition
+-- View with Condition
 CREATE VIEW expensive_products AS
 SELECT 
     p.id,

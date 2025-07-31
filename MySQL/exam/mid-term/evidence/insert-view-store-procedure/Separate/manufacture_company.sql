@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 31, 2025 at 06:50 AM
+-- Generation Time: Jul 31, 2025 at 03:44 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -38,19 +38,6 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `expensive_products`
--- (See below for the actual view)
---
-CREATE TABLE `expensive_products` (
-`id` int(100)
-,`name` varchar(50)
-,`price` int(5)
-,`manufacturer_name` varchar(50)
-);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `manufacturer`
 --
 
@@ -66,10 +53,11 @@ CREATE TABLE `manufacturer` (
 --
 
 INSERT INTO `manufacturer` (`id`, `name`, `address`, `contact_no`) VALUES
-(8, 'LG', 'South Korea', '+91252635546'),
-(9, 'ASUS', 'USA', '+91252634628'),
-(11, 'RAZER', 'USA', '+91252636185'),
-(12, 'SAMSUNG', 'South Korea', '+91252637614');
+(1, 'Assad', 'Mirpur', '01234-567890'),
+(2, 'Assad', 'Mirpur', '01234-567890'),
+(3, 'Rasel', 'Sariatpur', '01568-256428'),
+(4, 'LG', 'South Korea', '+9345-6546514'),
+(5, 'LG', 'South Korea', '+9345-6546514');
 
 --
 -- Triggers `manufacturer`
@@ -99,17 +87,10 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `name`, `price`, `manufacturer_id`) VALUES
-(10, 'Mouse', 2000, NULL),
+(10, 'Mouse', 2000, 1),
 (11, 'Mouse', 6000, NULL),
 (12, 'Monitor', 10000, NULL),
-(13, 'Monitor', 10000, NULL),
-(14, 'Monitor', 20000, NULL),
-(15, 'Monitor', 25000, 8),
-(16, 'Laptop', 20000, 9),
-(17, 'Mouse Viper Mini', 2000, 11),
-(18, 'S25 Ultra', 110000, NULL),
-(19, 'Monitor', 30000, NULL),
-(20, 'S25 Ultra', 110000, 12);
+(13, 'Monitor', 10000, NULL);
 
 -- --------------------------------------------------------
 
@@ -123,24 +104,6 @@ CREATE TABLE `product_view` (
 ,`price` int(5)
 ,`manufacturer_name` varchar(50)
 );
-
--- --------------------------------------------------------
-
---
--- Structure for view `expensive_products`
---
-DROP TABLE IF EXISTS `expensive_products`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `expensive_products`  AS SELECT `p`.`id` AS `id`, `p`.`name` AS `name`, `p`.`price` AS `price`, `m`.`name` AS `manufacturer_name` FROM (`product` `p` join `manufacturer` `m`) WHERE `m`.`id` = `p`.`manufacturer_id` AND `p`.`price` > 5000 ;
-
--- --------------------------------------------------------
-
---
--- Structure for view `product_view`
---
-DROP TABLE IF EXISTS `product_view`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `product_view`  AS SELECT `p`.`id` AS `id`, `p`.`name` AS `name`, `p`.`price` AS `price`, `m`.`name` AS `manufacturer_name` FROM (`product` `p` join `manufacturer` `m`) WHERE `m`.`id` = `p`.`manufacturer_id` ;
 
 --
 -- Indexes for dumped tables
@@ -167,13 +130,22 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `manufacturer`
 --
 ALTER TABLE `manufacturer`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `product_view`
+--
+DROP TABLE IF EXISTS `product_view`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `product_view`  AS SELECT `p`.`id` AS `id`, `p`.`name` AS `name`, `p`.`price` AS `price`, `m`.`name` AS `manufacturer_name` FROM (`product` `p` join `manufacturer` `m`) WHERE `m`.`id` = `p`.`manufacturer_id` ;
 
 --
 -- Constraints for dumped tables
