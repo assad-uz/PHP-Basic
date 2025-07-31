@@ -8,9 +8,9 @@ if(isset($_POST['submit'])){
     $store = $connt->query("call call_insert_p('$n','$p','$m_id')");
 }
 // delete products with manufacture id
-if(isset($_POST['delmanufact'])){
-	$mid = $_POST['manufac'];
-	$db->query(" delete from manufacturer where id='$mid ' ");
+if(isset($_POST['delete'])){
+	$m_id = $_POST['manufacturer_id'];
+  $connt->query("DELETE FROM manufacturer WHERE id = '$m_id'");
 }
 ?>
 
@@ -50,7 +50,7 @@ if(isset($_POST['delmanufact'])){
 </div>        
 <div class="d-flex gap-5">
     <button type="submit" class="btn btn-primary w-50" name="submit">Submit</button>
-    <button type="submit" class="btn btn-danger w-50" name="delmanufac">Delete</button>
+    <button type="submit" class="btn btn-danger w-50" name="delete">Delete</button>
 </div>
       </form>
     </div>
@@ -59,6 +59,35 @@ if(isset($_POST['delmanufact'])){
   <!-- after delete trigger -->
 
    
+<!-- view table -->
+
+  <div class="container mt-5">
+    <h3 class="mb-4">View All Products</h3>
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Product Name</th>
+          <th>Price</th>
+          <th>Manufacturer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php 
+        $product = $connt->query("select * from product_view");
+        while(list($_id,$_name,$_price,$_mname) = $product->fetch_row()){
+          echo "<tr>
+            <td>$_id</td>
+            <td>$_name</td>
+            <td>$_price</td>
+            <td>$_mname</td>
+          </tr>";
+        }
+        ?>
+      </tbody>
+    </table>
+  </div>
+
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -1,0 +1,31 @@
+Syntax: 
+
+CREATE [OR REPLACE] VIEW view_name AS
+SELECT column1, column2, ...
+FROM table_name
+WHERE conditions;
+
+
+---------------------------------
+CREATE OR REPLACE VIEW product_view AS
+SELECT 
+    p.id,
+    p.name,
+    p.price,
+    m.name AS manufacturer_name
+FROM product p
+LEFT JOIN manufacturer m ON p.manufacturer_id = m.id;
+
+-----------------------------------
+simple
+
+CREATE VIEW product_view AS
+SELECT 
+    p.id,
+    p.name,
+    p.price,
+    m.name AS manufacturer_name
+FROM product p, manufacturer m 
+WHERE m.id = p.manufacturer_id;
+
+
