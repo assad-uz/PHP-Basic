@@ -82,13 +82,18 @@ if(isset($_POST['delete_m'])) {
         <label class="form-label">Contact No:</label>
         <input type="text" class="form-control" name="contact_no" required>
       </div>
-      <div class="d-flex gap-3">
-        <button type="submit" class="btn btn-primary w-50" name="submit_m">Submit Manufacturer</button>
-        <a href="view_manufacturer.php" class="btn btn-success w-50">View Manufacturer</a>
-      </div>
-    </form>
-  </div>
+<div class="d-flex gap-3">
+  <button type="submit" class="btn btn-primary w-50" name="submit_m">Submit Manufacturer</button>
+  <button type="button" class="btn btn-success w-50" data-bs-toggle="modal" data-bs-target="#manufacturerModal">
+    View Manufacturer
+  </button>
 </div>
+
+</form>
+</div>
+</div>
+
+
     <!-- Product Form -->
     <div class="col-md-6">
       <div class="card shadow p-4">
@@ -123,12 +128,8 @@ if(isset($_POST['delete_m'])) {
   </div>
 
   <!-- Views -->
-  
-
-
-
   <div class="row mt-5">
-    <!-- All Products Table -->
+    <!-- Products Table -->
     <div class="col-md-6">
       <h4 class="mb-4 text-center text-success fw-semibold border-bottom pb-2">All Products</h4>
       <table class="table table-bordered table-striped">
@@ -182,6 +183,46 @@ if(isset($_POST['delete_m'])) {
           ?>
         </tbody>
       </table>
+    </div>
+  </div>
+</div>
+
+<!-- Manufacturer Modal -->
+<div class="modal fade" id="manufacturerModal" tabindex="-1" aria-labelledby="manufacturerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title" id="manufacturerModalLabel">Manufacturer List</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+          <thead class="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Address</th>
+              <th>Contact No</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php 
+            $result = $connt->query("SELECT * FROM manufacturer");
+            while($row = $result->fetch_assoc()) {
+              echo "<tr>
+                <td>{$row['id']}</td>
+                <td>{$row['name']}</td>
+                <td>{$row['address']}</td>
+                <td>{$row['contact_no']}</td>
+              </tr>";
+            }
+            ?>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
     </div>
   </div>
 </div>
