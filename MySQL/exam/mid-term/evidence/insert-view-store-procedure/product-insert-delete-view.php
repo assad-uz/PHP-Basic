@@ -4,17 +4,17 @@ $connt= mysqli_connect("localhost","root","","manufacture_company");
 if(isset($_POST['submit'])){
     $n = $_POST['name'];
     $p = $_POST['price'];
-    $m_id = $_POST['manufacture_id'];
+    $m_id = $_POST['manufacturer_id'];
     $store = $connt->query("call call_insert_p('$n','$p','$m_id')");
 }
-// delete manufacturer with products
-// if(isset($_POST['delmanufact'])){
-// 	$mid = $_POST['manufac'];
-// 	$db->query(" delete from manufacturer where id='$mid ' ");
-// }
+// delete products with manufacture id
+if(isset($_POST['delmanufact'])){
+	$mid = $_POST['manufac'];
+	$db->query(" delete from manufacturer where id='$mid ' ");
+}
 ?>
 
-<!-- products form and views-->
+<!-- product table-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,8 +38,8 @@ if(isset($_POST['submit'])){
         </div>
 
 <div class="mb-3">
-  <label class="form-label">Manufacturer ID:</label>
-  <select class="form-select" name="manufacture_id" required>
+  <label class="form-label" for="manufacture_id">Manufacturer:</label>
+  <select class="form-select" name="manufacturer_id" required>
     <?php 
       $manufac = $connt->query("SELECT * FROM manufacturer");
       while(list($_mid, $_mname) = $manufac->fetch_row()) {
@@ -48,28 +48,15 @@ if(isset($_POST['submit'])){
     ?>
   </select>
 </div>        
-<div class="d-flex gap-5"">
+<div class="d-flex gap-5">
     <button type="submit" class="btn btn-primary w-50" name="submit">Submit</button>
     <button type="submit" class="btn btn-danger w-50" name="delmanufac">Delete</button>
 </div>
-        <!-- <input type="submit" name="delmanufact" value="Delete" class="btn btn-danger"> -->
       </form>
     </div>
   </div>
 
   <!-- after delete trigger -->
-<!-- <form action="#" method="post">
-    Manufacturer: 
-    <select name="manufacture_id" required>
-        <?php 
-        $result = $db->query("SELECT * FROM manufacturer");
-        while(list($id, $name) = $result->fetch_row()){
-            echo "<option value='$id'>$name</option>";
-        }
-        ?>
-    </select><br>
-    <input type="submit" name="delmanufact" value="Delete">
-</form> -->
 
    
 
