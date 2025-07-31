@@ -1,12 +1,18 @@
 <?php 
 $connt = mysqli_connect("localhost", "root", "", "manufacture_company");
 
+$successMessage = ""; // Insert message holder
+$deleteMessage = ""; // Delete message holder
+
 // Manufacturer Insert
 if(isset($_POST['submit_m'])) {
     $n = $_POST['name'];
     $a = $_POST['address'];
     $c = $_POST['contact_no'];
     $store = $connt->query("CALL call_insert_m('$n', '$a', '$c')");
+    if ($store) {
+        $successMessage = "✅ Manufacturer inserted successfully!";
+    }
 }
 
 // Product Insert
@@ -15,12 +21,16 @@ if(isset($_POST['submit_p'])) {
     $p = $_POST['price'];
     $m_id = $_POST['manufacturer_id'];
     $store = $connt->query("CALL call_insert_p('$n', '$p', '$m_id')");
+    if ($store) {
+        $successMessage = "✅ Product inserted successfully!";
+    }
 }
 
-// Delete Manufacturer (and products if trigger is set)
+// Manufacturer Delete (and products if trigger is set)
 if(isset($_POST['delete_m'])) {
     $m_id = $_POST['manufacturer_id'];
     $connt->query("DELETE FROM manufacturer WHERE id = '$m_id'");
+    $deleteMessage = "🗑️ Manufacturer deleted successfully!";
 }
 ?>
 
@@ -34,11 +44,31 @@ if(isset($_POST['delete_m'])) {
 <body>
 
 <div class="container mt-5">
+  <!-- start alert message -->
+  <?php if (!empty($successMessage)): ?>
+  <div class="container mt-3">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <?= $successMessage ?>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </div>
+<?php endif; ?>
+
+<?php if (!empty($deleteMessage)): ?>
+  <div class="container mt-3">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <?= $deleteMessage ?>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </div>
+<?php endif; ?>
+<!-- end alert message -->
+
   <div class="row">
     <!-- Manufacturer Form -->
     <div class="col-md-6">
       <div class="card shadow p-4">
-        <h4 class="mb-3 text-center">Manufacturer Form</h4>
+        <h4 class="mb-4 text-center text-muted fw-bold border-bottom pb-2">Manufacturer Form</h4>
         <form method="POST">
           <div class="mb-3">
             <label class="form-label">Name:</label>
@@ -60,7 +90,7 @@ if(isset($_POST['delete_m'])) {
     <!-- Product Form -->
     <div class="col-md-6">
       <div class="card shadow p-4">
-        <h4 class="mb-3 text-center">Product Form</h4>
+        <h4 class="mb-4 text-center text-muted fw-bold border-bottom pb-2">Product Form</h4>
         <form method="POST">
           <div class="mb-3">
             <label class="form-label">Product Name:</label>
@@ -94,7 +124,7 @@ if(isset($_POST['delete_m'])) {
   <div class="row mt-5">
     <!-- All Products Table -->
     <div class="col-md-6">
-      <h4 class="mb-3 text-center">All Products</h4>
+      <h4 class="mb-4 text-center text-success fw-semibold border-bottom pb-2">All Products</h4>
       <table class="table table-bordered table-striped">
         <thead class="table-dark">
           <tr>
@@ -122,7 +152,7 @@ if(isset($_POST['delete_m'])) {
 
     <!-- Expensive Products Table -->
     <div class="col-md-6">
-      <h4 class="mb-3 text-center">Expensive Products (Above 5000 TK)</h4>
+      <h4 class="mb-4 text-center text-success fw-semibold border-bottom pb-2">Expensive Products (Above 5000 TK)</h4>
       <table class="table table-bordered table-striped">
         <thead class="table-dark">
           <tr>
