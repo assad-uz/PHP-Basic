@@ -88,6 +88,35 @@ if(isset($_POST['delete'])){
     </table>
   </div>
 
+<!-- View Expensive Products -->
+ <div class="container mt-5">
+  <h3 class="mb-4 text-center">View Expensive Products (Above 5000 TK)</h3>
+  <table class="table table-bordered table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Product Name</th>
+        <th>Price</th>
+        <th>Manufacturer</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php 
+        $expensive = $connt->query("SELECT * FROM expensive_products");
+        while(list($_id, $_name, $_price, $_mname) = $expensive->fetch_row()) {
+          echo "
+            <tr>
+              <td>$_id</td>
+              <td>$_name</td>
+              <td>$_price</td>
+              <td>$_mname</td>
+            </tr>";
+        }
+      ?>
+    </tbody>
+  </table>
+</div>
+
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

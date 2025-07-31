@@ -75,5 +75,50 @@ BEGIN
     WHERE manufacture_id = OLD.id;
 END;
 
+-- View 
+DELIMITER //
+BEGIN
+CREATE VIEW product_view AS
+SELECT 
+    p.id,
+    p.name,
+    p.price,
+    m.name AS manufacturer_name
+FROM product p, manufacturer m 
+WHERE m.id = p.manufacturer_id;
+END //
+DELIMITER ;
+
+-- View Condition
+CREATE VIEW expensive_products AS
+SELECT 
+    p.id,
+    p.name,
+    p.price,
+    m.name AS manufacturer_name
+FROM 
+    product p, manufacturer m
+WHERE 
+    m.id = p.manufacturer_id
+    AND p.price > 5000;
+
+
+
+/*
+-- View Condition (using join)
+CREATE VIEW expensive_products AS
+SELECT 
+    p.id,
+    p.name,
+    p.price,
+    m.name AS manufacturer_name
+FROM product p
+JOIN 
+    manufacturer m ON m.id = p.manufacturer_id
+WHERE 
+    p.price > 5000;
+*/
+
+
 
 
