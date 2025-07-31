@@ -65,28 +65,30 @@ if(isset($_POST['delete_m'])) {
 <!-- end alert message -->
 
   <div class="row">
-    <!-- Manufacturer Form -->
-    <div class="col-md-6">
-      <div class="card shadow p-4">
-        <h4 class="mb-4 text-center text-muted fw-bold border-bottom pb-2">Manufacturer Form</h4>
-        <form method="POST">
-          <div class="mb-3">
-            <label class="form-label">Name:</label>
-            <input type="text" class="form-control" name="name" required>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Address:</label>
-            <input type="text" class="form-control" name="address" required>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Contact No:</label>
-            <input type="text" class="form-control" name="contact_no" required>
-          </div>
-          <button type="submit" class="btn btn-primary w-100" name="submit_m">Submit Manufacturer</button>
-        </form>
+<!-- Manufacturer Form -->
+<div class="col-md-6">
+  <div class="card shadow p-4">
+    <h4 class="mb-4 text-center text-muted fw-bold border-bottom pb-2">Manufacturer Form</h4>
+    <form method="POST">
+      <div class="mb-3">
+        <label class="form-label">Name:</label>
+        <input type="text" class="form-control" name="name" required>
       </div>
-    </div>
-
+      <div class="mb-3">
+        <label class="form-label">Address:</label>
+        <input type="text" class="form-control" name="address" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Contact No:</label>
+        <input type="text" class="form-control" name="contact_no" required>
+      </div>
+      <div class="d-flex gap-3">
+        <button type="submit" class="btn btn-primary w-50" name="submit_m">Submit Manufacturer</button>
+        <a href="view_manufacturer.php" class="btn btn-success w-50">View Manufacturer</a>
+      </div>
+    </form>
+  </div>
+</div>
     <!-- Product Form -->
     <div class="col-md-6">
       <div class="card shadow p-4">
@@ -120,7 +122,11 @@ if(isset($_POST['delete_m'])) {
     </div>
   </div>
 
-  <!-- Product Views -->
+  <!-- Views -->
+  
+
+
+
   <div class="row mt-5">
     <!-- All Products Table -->
     <div class="col-md-6">
