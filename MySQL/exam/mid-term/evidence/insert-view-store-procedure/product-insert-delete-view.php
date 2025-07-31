@@ -61,60 +61,64 @@ if(isset($_POST['delete'])){
    
 <!-- view table -->
 
-  <div class="container mt-5">
-    <h3 class="mb-4">View All Products</h3>
-    <table class="table table-bordered table-striped">
-      <thead class="table-dark">
-        <tr>
-          <th>ID</th>
-          <th>Product Name</th>
-          <th>Price</th>
-          <th>Manufacturer</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php 
-        $product = $connt->query("select * from product_view");
-        while(list($_id,$_name,$_price,$_mname) = $product->fetch_row()){
-          echo "<tr>
-            <td>$_id</td>
-            <td>$_name</td>
-            <td>$_price</td>
-            <td>$_mname</td>
-          </tr>";
-        }
-        ?>
-      </tbody>
-    </table>
-  </div>
-
-<!-- View Expensive Products -->
- <div class="container mt-5">
-  <h3 class="mb-4 text-center">View Expensive Products (Above 5000 TK)</h3>
-  <table class="table table-bordered table-striped">
-    <thead class="table-dark">
-      <tr>
-        <th>ID</th>
-        <th>Product Name</th>
-        <th>Price</th>
-        <th>Manufacturer</th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php 
-        $expensive = $connt->query("SELECT * FROM expensive_products");
-        while(list($_id, $_name, $_price, $_mname) = $expensive->fetch_row()) {
-          echo "
-            <tr>
+<div class="container mt-5">
+  <div class="row">
+    <!-- All Products Table -->
+    <div class="col-md-6">
+      <h4 class="mb-3 text-center">All Products</h4>
+      <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Manufacturer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php 
+          $product = $connt->query("SELECT * FROM product_view");
+          while(list($_id,$_name,$_price,$_mname) = $product->fetch_row()){
+            echo "<tr>
               <td>$_id</td>
               <td>$_name</td>
               <td>$_price</td>
               <td>$_mname</td>
             </tr>";
-        }
-      ?>
-    </tbody>
-  </table>
+          }
+          ?>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Expensive Products Table -->
+    <div class="col-md-6">
+      <h4 class="mb-3 text-center">Expensive Products (Above 5000 TK)</h4>
+      <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Manufacturer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php 
+          $expensive = $connt->query("SELECT * FROM expensive_products");
+          while(list($_id, $_name, $_price, $_mname) = $expensive->fetch_row()) {
+            echo "<tr>
+              <td>$_id</td>
+              <td>$_name</td>
+              <td>$_price</td>
+              <td>$_mname</td>
+            </tr>";
+          }
+          ?>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
 
