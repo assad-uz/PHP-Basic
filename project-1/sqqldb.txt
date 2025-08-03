@@ -1,0 +1,11 @@
+
+Column                                                      Description
+
+id                                                   প্রতিটি বুকিংয়ের ইউনিক আইডি
+user_id                                 বুকিংটি কোন ইউজার করেছে (foreign key → users.id)
+room_id                                      কোন রুম বুক হয়েছে (foreign key → rooms.id)
+checkin_date                                                আগমনের তারিখ
+checkout_date                                                প্রস্থানের তারিখ
+total_amount                                               পুরো বুকিংয়ের খরচ
+status                                    বুকিংয়ের অবস্থা — pending / confirmed / cancelled
+created_at                                               কখন বুকিংটি তৈরি হয়েছে

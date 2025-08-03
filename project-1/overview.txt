@@ -1,0 +1,41 @@
+🔹 Hotel Management System - Overview
+
+> Modules:
+1. Admin Panel (Role-1)
+
+◆  Add/Edit/Delete Rooms
+◆  View Bookings
+◆  View Registered Customers
+◆  Manage Staff
+
+2. Customer Panel (Role-2)
+
+◆  Register/Login
+◆  View available rooms
+◆  Book room
+◆  Payment (if needed, demo)
+◆  Cancel booking
+
+3. Room Management
+
+◆  Room number
+◆  Type (Single, Double, Suite)
+◆  Price per night
+◆  Status (Available / Booked)
+
+4. Booking System
+
+◆  Customer 
+◆  Room ID
+◆  Check-in date
+◆  Check-out date
+◆  Total price
+
+5. Database Tables (suggested if using MySQL):
+
+ sql table:
+
+◆  Customers/users (id, name, phone, email, password)
+◆  Rooms(id, room_no, type, price, status)
+◆  Bookings(id, customer_id/user_id, room_id, checkin_date , checkout_date , total_amount, status, created_at)
+◆  Admins(id, username, password)
