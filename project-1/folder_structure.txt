@@ -1,0 +1,37 @@
+Recommended folder structure:
+
+hotel-management/
+│
+├── index.php                 ← ল্যান্ডিং পেজ (user অথবা login redirect করবে)
+├── config/
+│   └── db.php                ← ডেটাবেস কানেকশন
+│
+├── includes/                 
+│   ├── header.php            ← হেডার (menu, title ইত্যাদি)
+│   ├── footer.php            ← ফুটার
+│   └── auth.php              ← session চেকিং ফাংশন
+│
+├── admin/                    
+│   ├── dashboard.php         ← অ্যাডমিন ড্যাশবোর্ড
+│   ├── manage_rooms.php      ← রুম ম্যানেজমেন্ট
+│   ├── manage_bookings.php   ← বুকিং রিপোর্ট
+│   └── logout.php
+│
+├── user/
+│   ├── dashboard.php         ← ইউজার ড্যাশবোর্ড
+│   ├── book_room.php         ← রুম বুকিং ফর্ম
+│   ├── my_bookings.php       ← ইউজারের বুকিং রিপোর্ট
+│   └── logout.php
+│
+├── auth/
+│   ├── login.php             ← লগইন পেজ (admin/user)
+│   ├── register.php          ← ইউজার রেজিস্ট্রেশন (admin রেজিস্টার করতে পারবে না)
+│   └── logout.php
+│
+├── assets/
+│   ├── css/
+│   ├── js/
+│   └── images/
+│
+└── sql/
+    └── hotel_schema.sql      ← ডেটাবেস স্কিমা (structure, triggers, views)
