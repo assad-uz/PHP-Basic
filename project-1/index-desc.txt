@@ -9,41 +9,47 @@ Introduction অংশে তুমি বলো,
 ----------------------------------------
 1. Introduction
 
+এই সফটওয়্যারটা কী, 
+কেন দরকার
 প্রজেক্টের পটভূমি
-
 উদ্দেশ্য
 
-1. Project Scope
+
+2. Target Audience
+
+এই সফটওয়্যারটি কে কে ব্যবহার করবে।
+
+3. Project Scope
 
 প্রজেক্টের পরিসর
 
 কি কি ফিচার থাকবে
 
-1. System Requirements
+4. System Requirements
 
 হার্ডওয়্যার রিকোয়ারমেন্ট
 
 সফটওয়্যার রিকোয়ারমেন্ট
 
-1. System Architecture
+5. System Architecture
 
 সাধারণ আর্কিটেকচার ডায়াগ্রাম
 
 কম্পোনেন্টস
 
-1. Database Design
+6. Database Design
 
 টেবিল ডিজাইন
 
 রিলেশনশিপস
 
-1. User Roles and Access Control
+7. User Roles and Access Control
 
 অ্যাডমিন ও কাস্টমার রোলস
 
 এক্সেস লেভেল
 
-1. Features and Functionalities
+8. Features and Functionalities
 
 বুকিং সিস্টেম
 
@@ -51,25 +57,25 @@ Introduction অংশে তুমি বলো,
 
 পেমেন্ট গেটওয়ে
 
-1. User Interface
+9. User Interface
 
 UI ডিজাইন ও স্ক্রিনশট
 
 ইউজার এক্সপেরিয়েন্স
 
-1. Security Measures
+10. Security Measures
 
 ডেটা সিকিউরিটি
 
 প্রাইভেসি পলিসি
 
-1. Testing and Validation
+11. Testing and Validation
 
 টেস্টিং পদ্ধতি
 
 ফলাফল
 
-1. Conclusion
+12. Conclusion
 
 সারাংশ
 
