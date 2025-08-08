@@ -31,17 +31,25 @@ Introduction অংশে তুমি বলো,
 
 সফটওয়্যার রিকোয়ারমেন্ট
 
-5. System Architecture
+5. Flowchart
 
-সাধারণ আর্কিটেকচার ডায়াগ্রাম
+কারণ Flowchart দেখায় তোমার সিস্টেমের কার্যপ্রবাহ (process flow)।
 
-কম্পোনেন্টস
+এটি দেখায় কোন কাজ কখন হবে, কোন ধাপে কি decision নেওয়া হবে।
+
+এটি হাই লেভেলে logic বুঝতে সাহায্য করে।
 
 6. Database Design
 
 টেবিল ডিজাইন
 
 রিলেশনশিপস
+
+7. ER Diagram
+
+কারণ ER Diagram দেখায় তোমার ডেটা স্ট্রাকচার (Entity Relationship)।
+
+এটি দেখায় তোমার সিস্টেমে কোন কোন ডেটা থাকবে, এবং তাদের মধ্যে সম্পর্ক কেমন।
 
 7. User Roles and Access Control
 
