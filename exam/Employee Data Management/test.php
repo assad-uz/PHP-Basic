@@ -12,8 +12,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$message = "";
-
+// PRG pattern: insert data and redirect
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_employee'])) {
 
     $firstName = $conn->real_escape_string($_POST['first_name']);
@@ -31,11 +30,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_employee'])) {
                           VALUES ($emp_id, $salary)";
 
         if ($conn->query($insert_salary)) {
-            $message = "<div class='alert alert-success'>✅ Employee added successfully</div>";
+            // Redirect to same page to prevent duplicate insert
+            header("Location: ".$_SERVER['PHP_SELF']."?success=1");
+            exit;
         }
     }
 }
 
+// Check if success message should be shown
+$show_success = isset($_GET['success']);
+
+// Fetch employee list
 $read_sql = "
 SELECT 
     ED.EmployeeId,
@@ -56,14 +61,15 @@ ORDER BY ED.EmployeeId DESC
 
 $result = $conn->query($read_sql);
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Employee Management</title>
-<!-- Bootstrap 5 CDN -->
+<!-- Bootstrap 5 CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
@@ -75,8 +81,6 @@ $result = $conn->query($read_sql);
 </nav>
 
 <div class="container">
-
-<?= $message ?>
 
 <!-- Add Employee Form -->
 <div class="card mb-4 shadow-sm">
@@ -145,8 +149,22 @@ $result = $conn->query($read_sql);
   </div>
 </div>
 
+</div>
+
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</div>
+
+<!-- SweetAlert2 Success -->
+<?php if($show_success): ?>
+<script>
+Swal.fire({
+  icon: 'success',
+  title: 'Employee added successfully!',
+  showConfirmButton: false,
+  timer: 1800
+});
+</script>
+<?php endif; ?>
+
 </body>
 </html>
