@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 28, 2025 at 07:00 AM
+-- Generation Time: Dec 28, 2025 at 07:40 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `form`
+-- Database: `employee_data_management`
 --
 
 -- --------------------------------------------------------
@@ -39,9 +39,8 @@ CREATE TABLE `employeedemographics` (
 --
 
 INSERT INTO `employeedemographics` (`EmployeeId`, `FirstName`, `LastName`, `Gender`) VALUES
-(1, 'sharmony', 'rr', 'Male'),
-(2, 'sharmony', 'rr', 'Male'),
-(3, 'Azmira', 'Khatun', 'Female');
+(4, 'Assaduzzaman', 'Shaon', 'Male'),
+(6, 'Ashikuzzaman', 'Biswas', 'Male');
 
 -- --------------------------------------------------------
 
@@ -59,9 +58,8 @@ CREATE TABLE `employeesalary` (
 --
 
 INSERT INTO `employeesalary` (`EmployeeId`, `Salary`) VALUES
-(1, 345555),
-(2, 345555),
-(3, 25000);
+(4, 30000),
+(6, 35000);
 
 --
 -- Indexes for dumped tables
@@ -87,7 +85,7 @@ ALTER TABLE `employeesalary`
 -- AUTO_INCREMENT for table `employeedemographics`
 --
 ALTER TABLE `employeedemographics`
-  MODIFY `EmployeeId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `EmployeeId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
